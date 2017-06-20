@@ -1,0 +1,27 @@
+  .panel > .panel-heading {
+    background-image: none;
+    background-color: #dfe3ee;
+    color: black;
+    font-size: 200%;
+  }
+
+  .player-infos {
+    width:100%;
+    overflow:auto;
+  }
+
+  /* Les bordures du tableau seront collées (plus joli) */
+  table {
+      border-collapse: collapse;
+      border: 1px solid #ddd;
+      width: 100%;
+  }
+
+  th, td {
+      border-bottom: 1px solid #ddd;
+      height: 2em;
+      padding: 12px;
+  }
+
+  /* Striped table */
+  tr:nth-child(even) {background-color: #dfe3ee}

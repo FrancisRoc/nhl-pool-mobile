@@ -1,0 +1,18 @@
+header{
+	padding:5px 0px;
+	background-color:#3b5998;
+	text-align:center;
+}
+
+.page-header{
+	width:930px;
+	background-color:#3b5998;
+	margin: auto;
+	padding:5px;
+  border-bottom: none;
+}
+
+.appTitle{
+	color: white;
+  text-transform: uppercase;
+}

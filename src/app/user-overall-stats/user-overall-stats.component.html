@@ -1,0 +1,37 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Francis Rochon - TODO real user name</div>
+  <div class="panel-body">
+      <div class="row" *ngFor="let statAttrs of importantStatsAttrs">
+      <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="statAttrs.isCheck">
+        <label for="statAttrs.name"> {{statAttrs.name}}: </label>
+      </div>
+      <div class="col-sm-8 col-md-8 col-lg-8" *ngIf="statAttrs.isCheck">
+        <progress max="100" value="0"></progress>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <h2 class="addOpponent">
+    Add Opponent
+  </h2>
+  <button class="plusButton" (click)="onAddOpponentButtonClick()"><img src="../../../assets/plus.png" alt="Plus button"></button>
+  <app-add-opponent-form *ngIf="isAddOpponentActivated" [(showForm)]="isAddOpponentActivated"></app-add-opponent-form>
+</div>
+
+<div *ngFor="let opponent of opponents">
+  <div class="panel panel-default">
+    <div class="panel-heading">{{opponent.name}}</div>
+    <div class="panel-body">
+        <div class="row" *ngFor="let statAttrs of importantStatsAttrs">
+        <div class="col-sm-4 col-md-4 col-lg-4" *ngIf="statAttrs.isCheck">
+          <label for="statAttrs.name"> {{statAttrs.name}}: </label>
+        </div>
+        <div class="col-sm-8 col-md-8 col-lg-8" *ngIf="statAttrs.isCheck">
+          <progress max="100" value="0"></progress>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<div class="row">
+    <div class="col-sm-2 col-md-2 col-lg-2" *ngFor="let statAttrs of importantStatsAttrs">
+      <input type="checkbox" [checked]="statAttrs.isCheck" (change)="toggleSelectedStat(statAttrs)" name="statAttrs.name">{{statAttrs.name}}<br>
+    </div>
+</div>

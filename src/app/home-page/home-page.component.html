@@ -1,0 +1,41 @@
+<tool-bar></tool-bar>
+<app-header></app-header>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">Select the important stats for your pool</div>
+      <div class="panel-body">
+        <app-stats-selector (importantStatsAttrsChange)="toggleSelectedStat($event)"></app-stats-selector>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-6 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">Top Picks
+        <div class="dropdown">
+          <button class="dropbtn">
+            {{currentStat}}
+            <span class="caret"></span>
+          </button>
+          <div class="dropdown-menu">
+            <div class="dropdown-row" *ngFor="let stat of statsInDropdown">
+              <a class="dropdown-line" *ngIf="!stat.hide" (click)="playerList.getPlayerStat(stat.statName)" (click)="setDropdownCurrentStat(stat.statName)">{{stat.statName}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <app-players-list #playerList></app-players-list>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-6 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">Overall stats strength</div>
+      <div class="panel-body">
+        <app-user-overall-stats #overallStats></app-user-overall-stats>
+      </div>
+    </div>
+  </div>
+</div>
