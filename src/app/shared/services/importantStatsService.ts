@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { StatsAttributes } from 'app/shared/interfaces/stats-attributes';
-import { IMPORTANT_STATS_ATTRS } from 'app/shared/const/service-constants';
-import * as localStorageIndexes from 'app/shared/const/localStorageIndexes';
+import { StatsAttributes } from '../../../app/shared/interfaces/stats-attributes';
+import { IMPORTANT_STATS_ATTRS } from '../../../app/shared/const/service-constants';
+import * as localStorageIndexes from '../../../app/shared/const/localStorageIndexes';
 
 let util = require('util');
 

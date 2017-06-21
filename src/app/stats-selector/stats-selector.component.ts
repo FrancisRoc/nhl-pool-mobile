@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { UserOverallStatsComponent } from 'app/user-overall-stats/user-overall-stats.component';
-import { ImportantStatsService } from 'app/shared/services/importantStatsService';
-import { StatsAttributes } from 'app/shared/interfaces/stats-attributes';
+import { UserOverallStatsComponent } from '../../app/user-overall-stats/user-overall-stats.component';
+import { ImportantStatsService } from '../../app/shared/services/importantStatsService';
+import { StatsAttributes } from '../../app/shared/interfaces/stats-attributes';
 
 let util = require('util');
 

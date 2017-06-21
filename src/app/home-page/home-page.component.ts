@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { StatsSelectorComponent } from 'app/stats-selector/stats-selector.component';
-import { UserOverallStatsComponent } from 'app/user-overall-stats/user-overall-stats.component';
-import { STAT_FROM_BOOLEAN } from 'app/shared/const/service-constants';
-import { IDropdownStatInfo } from 'app/shared/interfaces/dropdownStatInfo';
-import { DTOStatsSelector } from 'app/stats-selector/dto-stats-selector';
-import * as localStorageIndexes from 'app/shared/const/localStorageIndexes';
+import { StatsSelectorComponent } from '../../app/stats-selector/stats-selector.component';
+import { UserOverallStatsComponent } from '../../app/user-overall-stats/user-overall-stats.component';
+import { STAT_FROM_BOOLEAN } from '../../app/shared/const/service-constants';
+import { IDropdownStatInfo } from '../../app/shared/interfaces/dropdownStatInfo';
+import { DTOStatsSelector } from '../../app/stats-selector/dto-stats-selector';
+import * as localStorageIndexes from '../../app/shared/const/localStorageIndexes';
 
 const util = require('util');
 
@@ -14,8 +14,8 @@ const util = require('util');
 })
 export class HomePageComponent implements OnInit {
   private statDictionary;           // Get stat name from boolean string (ex: isGoalsSelected = Goals)
-  private statsInDropdown: IDropdownStatInfo[];         // Stat names presented in dropdown menu
-  private currentStat: string;                          // Current stat selected in dropdown button
+  statsInDropdown: IDropdownStatInfo[];         // Stat names presented in dropdown menu
+  currentStat: string;                          // Current stat selected in dropdown button
 
   constructor() {
   }

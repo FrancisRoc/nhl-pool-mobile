@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AppHeader implements OnInit {
-    private title = 'Nhl Pool Helper';    // TODO put in config file
+    title = 'Nhl Pool Helper';    // TODO put in config file
 
     constructor() {}
 

@@ -15,10 +15,10 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { PlayerInfoPageComponent } from './player-info-page/player-info-page.component';
 import { AppRoutingModule } from './app-routing-module/app-routing-module';
 import { DraftedPageComponent } from './drafted-page/drafted-page.component';
-import { PlayersIndividualStatsService } from 'app/shared/services/playersIndividualStatsService';
-import { ImportantStatsService } from 'app/shared/services/importantStatsService';
-import { OpponentsService } from 'app/shared/services/opponentsService';
-import { PlayersInfoService } from 'app/shared/services/playerInfoService'
+import { PlayersIndividualStatsService } from '../app/shared/services/playersIndividualStatsService';
+import { ImportantStatsService } from '../app/shared/services/importantStatsService';
+import { OpponentsService } from '../app/shared/services/opponentsService';
+import { PlayersInfoService } from '../app/shared/services/playerInfoService'
 
 @NgModule({
   declarations: [

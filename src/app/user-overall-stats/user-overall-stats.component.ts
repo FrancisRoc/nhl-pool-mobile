@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { StatsSelectorComponent } from 'app/stats-selector/stats-selector.component';
-import { IMPORTANT_STATS_ATTRS } from 'app/shared/const/service-constants';
-import { Opponent } from 'app/add-opponent-form/opponent';
-import { OpponentsService } from 'app/shared/services/opponentsService';
-import { StatsAttributes } from 'app/shared/interfaces/stats-attributes';
-import { ImportantStatsService } from 'app/shared/services/importantStatsService';
+import { StatsSelectorComponent } from '../../app/stats-selector/stats-selector.component';
+import { IMPORTANT_STATS_ATTRS } from '../../app/shared/const/service-constants';
+import { Opponent } from '../../app/add-opponent-form/opponent';
+import { OpponentsService } from '../../app/shared/services/opponentsService';
+import { StatsAttributes } from '../../app/shared/interfaces/stats-attributes';
+import { ImportantStatsService } from '../../app/shared/services/importantStatsService';
 
 let util = require('util');
 
@@ -15,9 +15,9 @@ let util = require('util');
   styleUrls: ['./user-overall-stats.component.css'],
 })
 export class UserOverallStatsComponent implements OnInit, OnDestroy {
-  private isAddOpponentActivated: boolean;
-  private importantStatsAttrs: StatsAttributes[];                        // Attributes necessary from stats selected for pool
-  private opponents: Opponent[];
+  isAddOpponentActivated: boolean;
+  importantStatsAttrs: StatsAttributes[];                        // Attributes necessary from stats selected for pool
+  opponents: Opponent[];
 
   private opponentServiceSubscription: Subscription;
   private importantStatsServiceSubscription: Subscription;

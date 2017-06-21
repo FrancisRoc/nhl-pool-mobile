@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Opponent } from 'app/add-opponent-form/opponent';
+import { Opponent } from '../../../app/add-opponent-form/opponent';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import * as localStorageIndexes from 'app/shared/const/localStorageIndexes';
+import * as localStorageIndexes from '../../../app/shared/const/localStorageIndexes';
 
 let util = require('util');
 

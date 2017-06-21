@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { OpponentsService } from 'app/shared/services/opponentsService';
+import { OpponentsService } from '../../app/shared/services/opponentsService';
 import { NgForm } from '@angular/forms'
 import { Opponent } from './opponent';
 

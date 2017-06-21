@@ -1,4 +1,4 @@
-import { StatsAttributes } from 'app/shared/interfaces/stats-attributes'
+import { StatsAttributes } from '../../../app/shared/interfaces/stats-attributes'
 
 export let IMPORTANT_STATS_ATTRS: StatsAttributes[] = [
   { name: "Goals", selectorName: "isGoalsSelected", isCheck: false },

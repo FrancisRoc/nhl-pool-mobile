@@ -3,12 +3,12 @@ import { Router } from '@angular/router'
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Subscription } from 'rxjs/Subscription';
-import { DTOStatsSelector } from 'app/stats-selector/dto-stats-selector';
-import { STAT_NAME_FROM_ABREVIATION } from 'app/shared/const/service-constants';
-import { PlayersIndividualStatsService } from 'app/shared/services/playersIndividualStatsService';
-import { IPlayerIndividualStat } from 'app/shared/interfaces/playerIndividualStat';
-import { OpponentsService } from 'app/shared/services/opponentsService';
-import { Opponent } from 'app/add-opponent-form/opponent';
+import { DTOStatsSelector } from '../../app/stats-selector/dto-stats-selector';
+import { STAT_NAME_FROM_ABREVIATION } from '../../app/shared/const/service-constants';
+import { PlayersIndividualStatsService } from '../../app/shared/services/playersIndividualStatsService';
+import { IPlayerIndividualStat } from '../../app/shared/interfaces/playerIndividualStat';
+import { OpponentsService } from '../../app/shared/services/opponentsService';
+import { Opponent } from '../../app/add-opponent-form/opponent';
 
 import * as localStorageIndexes from 'app/shared/const/localStorageIndexes';
 
@@ -22,13 +22,13 @@ var util = require('util');
 
 @Injectable()
 export class PlayersListComponent implements OnInit, OnDestroy {
-  private playersIndividualStats: IPlayerIndividualStat[];          // Array containint all players with only one stat (ex: goals)
+  playersIndividualStats: IPlayerIndividualStat[];          // Array containint all players with only one stat (ex: goals)
   private statNameFromAbreviation;                                  // Get stat name from abbreviation (ex: G = Goals)
-  private currentStatString:string;
-  private currentStatTag:string;
+  currentStatString:string;
+  currentStatTag:string;
   private subscription: Subscription;
-  private opponents: Opponent[];
-
+  opponents: Opponent[];
+  
   constructor(private http: Http,
               private router: Router,
               private serveStatService: PlayersIndividualStatsService,

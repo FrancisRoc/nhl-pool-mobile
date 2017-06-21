@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
-import { IPlayerIndividualStat } from 'app/shared/interfaces/playerIndividualStat';
+import { IPlayerIndividualStat } from '../../../app/shared/interfaces/playerIndividualStat';
 let util = require('util');
 
 @Injectable()

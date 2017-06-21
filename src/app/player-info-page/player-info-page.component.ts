@@ -3,8 +3,8 @@ import { Http, Response } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
-import { PlayersInfoService } from 'app/shared/services/playerInfoService';
-import * as Player from 'app/shared/interfaces/playerInfo';
+import { PlayersInfoService } from '../../app/shared/services/playerInfoService';
+import * as Player from '../../app/shared/interfaces/playerInfo';
 
 let util = require('util');
 
@@ -14,15 +14,15 @@ let util = require('util');
   styleUrls: ['./player-info-page.component.css'],
 })
 export class PlayerInfoPageComponent implements OnInit {
-  private playerInfos2014: Player.PlayerInfo = null;
-  private playerInfos2015: Player.PlayerInfo = null;
-  private playerInfos2016: Player.PlayerInfo = null;
-  private playerInfos2017: Player.PlayerInfo = null;
+  playerInfos2014: Player.PlayerInfo = null;
+  playerInfos2015: Player.PlayerInfo = null;
+  playerInfos2016: Player.PlayerInfo = null;
+  playerInfos2017: Player.PlayerInfo = null;
 
-  private isLoaded2014: boolean = false;
-  private isLoaded2015: boolean = false;
-  private isLoaded2016: boolean = false;
-  private isLoaded2017: boolean = false;
+  isLoaded2014: boolean = false;
+  isLoaded2015: boolean = false;
+  isLoaded2016: boolean = false;
+  isLoaded2017: boolean = false;
 
   constructor(
     private http: Http,
