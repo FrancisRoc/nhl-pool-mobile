@@ -14,18 +14,19 @@
   },
   "private": true,
   "dependencies": {
-    "@types/node": "^6.0.42",
-    "@angular/compiler-cli": "^2.3.1",
     "@angular/common": "^2.3.1",
     "@angular/compiler": "^2.3.1",
+    "@angular/compiler-cli": "^2.3.1",
     "@angular/core": "^2.3.1",
     "@angular/forms": "^2.3.1",
     "@angular/http": "^2.3.1",
     "@angular/platform-browser": "^2.3.1",
     "@angular/platform-browser-dynamic": "^2.3.1",
     "@angular/router": "^3.3.1",
-    "angular-cli": "1.0.0-beta.28.3",
+    "@ngtools/webpack": "^1.2.4",
+    "@types/node": "^6.0.42",
     "angular-2-local-storage": "1.0.1",
+    "angular-cli": "1.0.0-beta.28.3",
     "bootstrap": "3.3.7",
     "bootstrap-sass": "3.3.7",
     "core-js": "^2.4.1",
@@ -50,9 +51,8 @@
     "tslint": "^4.3.0",
     "typescript": "~2.0.3"
   },
-
   "engines": {
-  "node": "7.7.1",
-  "npm": "4.1.2"
-}
+    "node": "7.7.1",
+    "npm": "4.1.2"
+  }
 }
