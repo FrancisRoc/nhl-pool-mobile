@@ -12,8 +12,8 @@ export class PlayersIndividualStatsService {
     constructor(private http: Http) {}
 
     requestPlayersStats(statToGet: string): Observable<IPlayerIndividualStat[]> {
-        console.log("Send request: http://localhost:12345/api/nhl/poolApp/v1/players/stats/" + statToGet);
-        return this.http.get('http://localhost:12345/api/nhl/poolApp/v1/players/stats/' + statToGet)
+        console.log("Send request: https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/v1/players/stats/" + statToGet);
+        return this.http.get('https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/v1/players/stats/' + statToGet)
                         .map(this.extractData)
                         .catch(this.handleError);
     }
