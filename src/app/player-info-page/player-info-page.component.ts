@@ -14,10 +14,7 @@ let util = require('util');
   styleUrls: ['./player-info-page.component.css'],
 })
 export class PlayerInfoPageComponent implements OnInit {
-  playerInfos2014: Player.PlayerInfo = null;
-  playerInfos2015: Player.PlayerInfo = null;
-  playerInfos2016: Player.PlayerInfo = null;
-  playerInfos2017: Player.PlayerInfo = null;
+  playerInfos: Player.PlayerInfo[] = [];
 
   isLoaded2014: boolean = false;
   isLoaded2015: boolean = false;
@@ -41,38 +38,18 @@ export class PlayerInfoPageComponent implements OnInit {
   }
 
   getPlayerInfos() {
-    this.route.params
-          .switchMap((params: Params) => this.playerInfoService.requestPlayerInfo(params['id'], 2014))
-          .subscribe((playerInfos: Player.PlayerInfo) => {
-            this.playerInfos2014 = playerInfos[0]
-            if (playerInfos[0] !== undefined) {
-              this.isLoaded2014 = true;
-            }
-        });
-    this.route.params
-          .switchMap((params: Params) => this.playerInfoService.requestPlayerInfo(params['id'], 2015))
-          .subscribe((playerInfos: Player.PlayerInfo) => {
-            this.playerInfos2015 = playerInfos[0]
-            if (playerInfos[0] !== undefined) {
-              this.isLoaded2015 = true;
-            }
-        });
-    this.route.params
-          .switchMap((params: Params) => this.playerInfoService.requestPlayerInfo(params['id'], 2016))
-          .subscribe((playerInfos: Player.PlayerInfo) => {
-            this.playerInfos2016 = playerInfos[0]
-            if (playerInfos[0] !== undefined) {
-              this.isLoaded2016 = true;
-            }
-        });
-    this.route.params
-          .switchMap((params: Params) => this.playerInfoService.requestPlayerInfo(params['id'], 2017))
-          .subscribe((playerInfos: Player.PlayerInfo) => {
-            this.playerInfos2017 = playerInfos[0]
-            if (playerInfos[0] !== undefined) {
-              this.isLoaded2017 = true;
-            }
-        });
+    let year: number;
+    for (let i = 0; i < 4; i++) {
+      year = 2014 + i;
+      this.route.params
+            .switchMap((params: Params) => this.playerInfoService.requestPlayerInfo(params['id'], year))
+            .subscribe((playerInfos: Player.PlayerInfo) => {
+              this.playerInfos.push(playerInfos[0]);
+              if (playerInfos[0] !== undefined) {
+                this.isLoaded2014 = true;
+              }
+          });
+    }
   }
 
 }
