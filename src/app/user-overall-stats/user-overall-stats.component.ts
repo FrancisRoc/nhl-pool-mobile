@@ -25,6 +25,7 @@ export class UserOverallStatsComponent implements OnInit, OnDestroy {
   constructor(private importantStatsService: ImportantStatsService,
               private opponentService: OpponentsService) {
       this.importantStatsServiceSubscription = importantStatsService.getImportantStatsAttrsChangeEvent().subscribe(importantStatsAttrs => {
+        console.log("Important stats in user overall section updated: " + util.inspect(importantStatsAttrs, false, null));
         this.importantStatsAttrs = importantStatsAttrs;
       });
 

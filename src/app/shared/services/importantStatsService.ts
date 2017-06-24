@@ -24,7 +24,7 @@ export class ImportantStatsService {
 
     changeIsCheckStat(statAttrs: StatsAttributes) {
       statAttrs.isCheck = !statAttrs.isCheck;
-      console.log(statAttrs.name + " was toggle to " + statAttrs.isCheck);
+      this.importantStatsAttrsChange.next(this.importantStatsAttrs);
       localStorage.setItem(localStorageIndexes.SERVICE_IMPORTANT_STATS_ATTRS, JSON.stringify(this.importantStatsAttrs));
     }
 
