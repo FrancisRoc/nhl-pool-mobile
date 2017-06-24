@@ -7,13 +7,12 @@
 
 app-stats-selector {
   display: block;
-  margin-left: 15px;
   margin-bottom: 15px;
 }
 
 app-players-list {
   display: block;
-  margin: 0px 15px 15px 15px;
+  margin: 0px 0px 15px 0px;
 }
 
 .col-lg-6{
