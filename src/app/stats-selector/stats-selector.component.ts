@@ -9,7 +9,6 @@ let util = require('util');
   selector: 'app-stats-selector',
   templateUrl: './stats-selector.component.html',
   styleUrls: ['./stats-selector.component.css'],
-  providers: [ImportantStatsService],
 })
 
 export class StatsSelectorComponent implements OnInit {
