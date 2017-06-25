@@ -86,8 +86,8 @@ export class PlayersListComponent implements OnInit, OnDestroy {
     this.router.navigate(['/playerInfo', player.player.ID]);
   }
 
-  playerDraftBy(event) {
-    //TODO.
+  playerDraftBy(opponent, playerId) {
+    console.log("Player with id " + playerId + " drafted by: " + opponent);
   }
 
   saveData() {

@@ -22,7 +22,7 @@
               </button>
               <div class="dropdown-menu">
                 <div class="dropdown-row" *ngFor="let opponent of opponents">
-                  <a class="dropdown-line"(click)="playerDraftBy($event)" >{{opponent.name}}</a>
+                  <a class="dropdown-line"(click)="playerDraftBy(opponent.name, playerStats?.player?.ID)" >{{opponent.name}}</a>
                 </div>
               </div>
             </div>
