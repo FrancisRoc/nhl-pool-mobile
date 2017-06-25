@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 import { PlayersInfoService } from '../../app/shared/services/playerInfoService';
+import { playerInfosStatsLabels } from "../shared/const/constants";
 import * as Player from '../../app/shared/interfaces/playerInfo';
 
 let util = require('util');
@@ -15,11 +16,7 @@ let util = require('util');
 })
 export class PlayerInfoPageComponent implements OnInit {
   playerInfos: Player.PlayerInfo[] = [];
-
-  isLoaded2014: boolean = false;
-  isLoaded2015: boolean = false;
-  isLoaded2016: boolean = false;
-  isLoaded2017: boolean = false;
+  playerInfosStatsLabels: string[] = playerInfosStatsLabels;
 
   constructor(
     private http: Http,
@@ -45,9 +42,6 @@ export class PlayerInfoPageComponent implements OnInit {
             .switchMap((params: Params) => this.playerInfoService.requestPlayerInfo(params['id'], year))
             .subscribe((playerInfos: Player.PlayerInfo) => {
               this.playerInfos.push(playerInfos[0]);
-              if (playerInfos[0] !== undefined) {
-                this.isLoaded2014 = true;
-              }
           });
     }
   }
