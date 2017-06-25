@@ -26,6 +26,8 @@ export interface PlayerStats {
     points: number;
     hatTricks: number;
     plusMinus: number;
+    shots: number;
+    shotPercentage: number;
     penalityMin: number;
     powerplayGoals: number;
     powerplayAssists: number;
@@ -36,6 +38,8 @@ export interface PlayerStats {
     gameWinningGoals: number;
     gameTyingGoals: number;
     hits: number;
+    faceoffs: number;
+    faceoffPercent: number;
 }
 
 export interface Stats {
@@ -48,4 +52,5 @@ export interface PlayerInfo {
     player: Player;
     team: Team;
     stats: Stats;
+    year: number;
 }

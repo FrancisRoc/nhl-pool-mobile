@@ -3,7 +3,7 @@
 
 <div class="col-md-12">
   <div class="panel panel-default">
-    <div class="panel-heading">{{playerInfos[3]?.player?.FirstName}} {{playerInfos[3]?.player?.LastName}} | #{{playerInfos[3]?.player?.JerseyNumber}}</div>
+    <div class="panel-heading">{{playerInfos[0]?.player?.FirstName}} {{playerInfos[0]?.player?.LastName}} | #{{playerInfos[0]?.player?.JerseyNumber}}</div>
     <div class="panel-body">
       <div class="player-infos">
         <table>
@@ -14,7 +14,7 @@
           </thead>
           <tbody *ngFor="let playerInfos of playerInfos">
             <tr>
-              <td> 2013/2014 </td>
+              <td> {{playerInfos?.year - 1}} -  {{playerInfos?.year}}</td>
               <td> {{playerInfos?.team?.Abbreviation}} </td>
               <td> {{playerInfos?.stats?.gamesPlayed}} </td>
               <td> {{playerInfos?.stats?.stats?.goals}} </td>

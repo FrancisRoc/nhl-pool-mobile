@@ -82,7 +82,6 @@ export class PlayersListComponent implements OnInit, OnDestroy {
   }
 
   onPlayerSelect(player) {
-    console.log(util.inspect(player, false, null))
     // Navigate to player infos page
     this.router.navigate(['/playerInfo', player.player.ID]);
   }

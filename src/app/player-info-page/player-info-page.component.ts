@@ -41,9 +41,20 @@ export class PlayerInfoPageComponent implements OnInit {
       this.route.params
             .switchMap((params: Params) => this.playerInfoService.requestPlayerInfo(params['id'], year))
             .subscribe((playerInfos: Player.PlayerInfo) => {
-              this.playerInfos.push(playerInfos[0]);
+              if (playerInfos[0]) {
+                this.playerInfos.push(playerInfos[0]);
+                this.playerInfos.sort(this.compare);
+              }
           });
     }
+  }
+
+  compare(a,b) {
+    if (a.year < b.year)
+      return -1;
+    if (a.year > b.year)
+      return 1;
+    return 0;
   }
 
 }
