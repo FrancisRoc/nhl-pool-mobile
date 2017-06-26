@@ -18,7 +18,8 @@ import { DraftedPageComponent } from './drafted-page/drafted-page.component';
 import { PlayersIndividualStatsService } from '../app/shared/services/playersIndividualStatsService';
 import { ImportantStatsService } from '../app/shared/services/importantStatsService';
 import { OpponentsService } from '../app/shared/services/opponentsService';
-import { PlayersInfoService } from '../app/shared/services/playerInfoService'
+import { PlayersInfoService } from '../app/shared/services/playerInfoService';
+import { DraftPlayerService } from '../app/shared/services/draftPlayerService';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { PlayersInfoService } from '../app/shared/services/playerInfoService'
     PlayersIndividualStatsService,
     OpponentsService,
     ImportantStatsService,
-    PlayersInfoService
+    PlayersInfoService,
+    DraftPlayerService,
   ],
   bootstrap: [AppComponent]
 })

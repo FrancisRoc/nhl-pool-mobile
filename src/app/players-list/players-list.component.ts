@@ -9,6 +9,7 @@ import { PlayersIndividualStatsService } from '../../app/shared/services/players
 import { IPlayerIndividualStat } from '../../app/shared/interfaces/playerIndividualStat';
 import { OpponentsService } from '../../app/shared/services/opponentsService';
 import { Opponent } from '../../app/add-opponent-form/opponent';
+import { DraftPlayerService } from '../shared/services/draftPlayerService';
 
 import * as localStorageIndexes from 'app/shared/const/localStorageIndexes';
 
@@ -22,7 +23,7 @@ var util = require('util');
 
 @Injectable()
 export class PlayersListComponent implements OnInit, OnDestroy {
-  playersIndividualStats: IPlayerIndividualStat[];          // Array containint all players with only one stat (ex: goals)
+  playersIndividualStats: any[]; //TODO USE PLAYER.PLAYERINFO INTERFACE         // Array containint all players with only one stat (ex: goals)
   private statNameFromAbreviation;                                  // Get stat name from abbreviation (ex: G = Goals)
   currentStatString:string;
   currentStatTag:string;
@@ -32,7 +33,8 @@ export class PlayersListComponent implements OnInit, OnDestroy {
   constructor(private http: Http,
               private router: Router,
               private serveStatService: PlayersIndividualStatsService,
-              private opponentService: OpponentsService) {
+              private opponentService: OpponentsService,
+              private draftPlayerService: DraftPlayerService) {
       this.subscription = opponentService.getAddOpponentEvent().subscribe(opponents => {
           this.opponents = opponents;
       })
@@ -88,6 +90,10 @@ export class PlayersListComponent implements OnInit, OnDestroy {
 
   playerDraftBy(opponent, playerId) {
     console.log("Player with id " + playerId + " drafted by: " + opponent);
+    this.draftPlayerService.draftPlayer(playerId);
+
+    // Remove from players list
+    this.playersIndividualStats = this.playersIndividualStats.filter(item => item.player.ID !== playerId);
   }
 
   saveData() {
