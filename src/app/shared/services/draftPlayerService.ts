@@ -12,7 +12,7 @@ export class DraftPlayerService {
 
     draftPlayer(playerId: number): Observable<void> {
         console.log("Send request: https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/v1/players/draft/" + playerId);
-        return this.http.get('https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/v1/players/draft/' + playerId)
+        return this.http.delete('https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/v1/players/draft/' + playerId)
                         .map(this.extractData)
                         .catch(this.handleError);
     }
