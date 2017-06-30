@@ -11,5 +11,5 @@ export const AUTH_CONFIG: AuthConfig = {
   CLIENT_DOMAIN: 'nhlpoolhelper.auth0.com',
   AUDIENCE: 'nhl-pool-helper-api',
   REDIRECT: 'http://localhost:4200/callback',
-  SCOPE: 'openid'
+  SCOPE: 'openid profile'
 };
