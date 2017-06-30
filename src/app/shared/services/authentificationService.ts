@@ -69,6 +69,7 @@ export class AuthService {
   }
 
   private _setSession(authResult, profile) {
+    console.log(util.inspect(authResult, false, null));
     // Save session data and update login status subject
     localStorage.setItem('token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);

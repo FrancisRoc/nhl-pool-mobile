@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { AuthHttp } from 'angular2-jwt';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
@@ -9,11 +10,11 @@ let util = require('util');
 
 @Injectable()
 export class PlayersIndividualStatsService {
-    constructor(private http: Http) {}
+    constructor(private http: Http, private authHttp: AuthHttp) {}
 
     requestPlayersStats(statToGet: string): Observable<IPlayerIndividualStat[]> {
         console.log("Send request: https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/v1/players/stats/" + statToGet);
-        return this.http.get('https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/v1/players/stats/' + statToGet)
+        return this.authHttp.get('https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/v1/players/stats/' + statToGet)
                         .map(this.extractData)
                         .catch(this.handleError);
     }
