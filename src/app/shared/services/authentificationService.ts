@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Headers }  from '@angular/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AUTH_CONFIG } from './auth0-variables';
-import { tokenNotExpired } from 'angular2-jwt';
+import { tokenNotExpired, AuthHttp } from 'angular2-jwt';
 
 let util = require('util');
 
@@ -23,7 +24,7 @@ export class AuthService {
   loggedIn: boolean;
   loggedIn$ = new BehaviorSubject<boolean>(this.loggedIn);
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authHttp: AuthHttp) {
     // If authenticated, set local profile property and update login status subject
     if (this.authenticated) {
       this.setLoggedIn(true);
@@ -51,6 +52,17 @@ export class AuthService {
     // When Auth0 hash parsed, get profile
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
+        // Send idToken with user infos to backend
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        if (authResult.idToken !== "") {
+            let tokenValue = 'Bearer ' + authResult.idToken;
+            console.log("tokenValue:" + tokenValue);
+            headers.append('Authorization', tokenValue);
+        }
+        this.authHttp.post('https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/account/authentification', { headers: headers});
+
         window.location.hash = '';
         this._getProfile(authResult);
         this.router.navigate(['/home']);
