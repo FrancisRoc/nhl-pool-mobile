@@ -1,0 +1,16 @@
+<h3 class="text-center" (click)="authService.login()">Login</h3>
+
+
+<!-- We are going to use the authService.loggedIn() method to see if the user is logged in or not. If they are not logged in we'll encourage them to login, otherwise if they are logged in, we'll provide a handy link to private deals. We haven't implemented the authService yet, so don't worry about the functionality just yet -->
+<div class="col-sm-12" *ngIf="!authService.loggedIn">
+  <div class="jumbotron text-center">
+    <h2>Get More Deals By Logging In</h2>
+  </div>
+</div>
+
+<div class="col-sm-12" *ngIf="authService.loggedIn">
+  <div class="jumbotron text-center">
+    <h2>View Private Deals</h2>
+    <a class="btn btn-lg btn-success" routerLink="/home">Home</a>
+  </div>
+</div>

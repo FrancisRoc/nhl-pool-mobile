@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { AUTH_PROVIDERS } from 'angular2-jwt';
 
 import { AppComponent } from './app.component';
 import { ToolBar } from './shared/component/toolbar/toolbar.component';
@@ -20,6 +21,11 @@ import { ImportantStatsService } from '../app/shared/services/importantStatsServ
 import { OpponentsService } from '../app/shared/services/opponentsService';
 import { PlayersInfoService } from '../app/shared/services/playerInfoService';
 import { DraftPlayerService } from '../app/shared/services/draftPlayerService';
+import { AuthService } from '../app/shared/services/authentificationService';
+import { AuthGuard } from '../app/autoGuard/authentificationGuard';
+
+import { LoginPageComponent } from './login-page/login-page.component';
+import { CallbackComponent } from './callback/callback.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +40,8 @@ import { DraftPlayerService } from '../app/shared/services/draftPlayerService';
     HomePageComponent,
     PlayerInfoPageComponent,
     DraftedPageComponent,
+    LoginPageComponent,
+    CallbackComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +55,9 @@ import { DraftPlayerService } from '../app/shared/services/draftPlayerService';
     ImportantStatsService,
     PlayersInfoService,
     DraftPlayerService,
+    AuthService,
+    AUTH_PROVIDERS,
+    AuthGuard,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './shared/services/authentificationService';
 
 const util = require('util');
 
@@ -7,5 +8,6 @@ const util = require('util');
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  
+  constructor(private authService: AuthService) {
+  }
 }
