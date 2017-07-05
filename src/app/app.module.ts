@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { AUTH_PROVIDERS } from 'angular2-jwt';
+import { HttpModule, Http, RequestOptions } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { ToolBar } from './shared/component/toolbar/toolbar.component';
@@ -23,9 +22,18 @@ import { PlayersInfoService } from '../app/shared/services/playerInfoService';
 import { DraftPlayerService } from '../app/shared/services/draftPlayerService';
 import { AuthService } from '../app/shared/services/authentificationService';
 import { AuthGuard } from '../app/autoGuard/authentificationGuard';
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
 import { LoginPageComponent } from './login-page/login-page.component';
 import { CallbackComponent } from './callback/callback.component';
+
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+  return new AuthHttp(new AuthConfig({
+    tokenName: 'token',
+          tokenGetter: (() => localStorage.getItem('token')),
+          globalHeaders: [{'Content-Type':'application/json'}],
+     }), http, options);
+}
 
 @NgModule({
   declarations: [
@@ -57,7 +65,11 @@ import { CallbackComponent } from './callback/callback.component';
     DraftPlayerService,
     AuthService,
     AuthGuard,
-    AUTH_PROVIDERS
+    {
+      provide: AuthHttp,
+      useFactory: authHttpServiceFactory,
+      deps: [Http, RequestOptions]
+    }
   ],
   bootstrap: [AppComponent]
 })
