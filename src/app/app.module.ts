@@ -20,6 +20,7 @@ import { ImportantStatsService } from '../app/shared/services/importantStatsServ
 import { OpponentsService } from '../app/shared/services/opponentsService';
 import { PlayersInfoService } from '../app/shared/services/playerInfoService';
 import { DraftPlayerService } from '../app/shared/services/draftPlayerService';
+import { UserInfosService } from '../app/shared/services/userInfosService';
 import { AuthService } from '../app/shared/services/authentificationService';
 import { AuthGuard } from '../app/autoGuard/authentificationGuard';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
@@ -63,6 +64,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ImportantStatsService,
     PlayersInfoService,
     DraftPlayerService,
+    UserInfosService,
     AuthService,
     AuthGuard,
     {

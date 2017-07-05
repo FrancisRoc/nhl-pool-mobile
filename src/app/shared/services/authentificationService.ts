@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Headers }  from '@angular/http';
+import { Headers, RequestOptions }  from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AUTH_CONFIG } from './auth0-variables';
 import { tokenNotExpired, AuthHttp } from 'angular2-jwt';
+
+import { IUserInfos } from '../interfaces/userInfos';
+import { UserInfosService } from './userInfosService';
 
 let util = require('util');
 
@@ -24,7 +28,7 @@ export class AuthService {
   loggedIn: boolean;
   loggedIn$ = new BehaviorSubject<boolean>(this.loggedIn);
 
-  constructor(private router: Router, private authHttp: AuthHttp) {
+  constructor(private router: Router, private authHttp: AuthHttp, private userInfosService: UserInfosService) {
     // If authenticated, set local profile property and update login status subject
     if (this.authenticated) {
       this.setLoggedIn(true);
@@ -61,8 +65,14 @@ export class AuthService {
             console.log("tokenValue:" + tokenValue);
             headers.append('Authorization', tokenValue);
         }
-        //TODO get user infos
-        this.authHttp.post('https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/account/authentification', { headers: headers});
+        //Get user infos
+        let options = new RequestOptions({ headers: headers });
+        this.authHttp.post('http://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/v1/account/authentification', '', options)
+                          .subscribe(data => {
+                            let userInfos: IUserInfos = JSON.parse(data.text());
+                            this.userInfosService.setUserInfos(userInfos);
+                          },
+                          err => console.log(err));
 
         window.location.hash = '';
         this._getProfile(authResult);
