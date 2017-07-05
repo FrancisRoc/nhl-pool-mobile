@@ -61,6 +61,7 @@ export class AuthService {
             console.log("tokenValue:" + tokenValue);
             headers.append('Authorization', tokenValue);
         }
+        //TODO get user infos
         this.authHttp.post('https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/account/authentification', { headers: headers});
 
         window.location.hash = '';
