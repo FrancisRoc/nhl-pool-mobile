@@ -78,7 +78,7 @@ export class AuthService {
         this._getProfile(authResult);
         this.router.navigate(['/home']);
       } else if (err) {
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
         console.error(`Error: ${err.error}`);
       }
     });
