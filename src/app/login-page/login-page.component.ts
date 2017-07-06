@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthenticationService } from '../shared/services/authentification.service';
+import { UserService } from '../shared/services/user.service';
+import { User } from '../shared/models/user';
 
 @Component({
   templateUrl: './login-page.component.html',
@@ -14,7 +16,8 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService,
+    private userService: UserService) { }
 
   ngOnInit() {
     // reset login status

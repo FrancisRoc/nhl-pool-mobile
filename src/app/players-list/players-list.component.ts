@@ -10,6 +10,7 @@ import { IPlayerIndividualStat } from '../../app/shared/interfaces/playerIndivid
 import { OpponentsService } from '../../app/shared/services/opponentsService';
 import { Opponent } from '../../app/add-opponent-form/opponent';
 import { DraftPlayerService } from '../shared/services/draftPlayerService';
+import { User } from '../shared/models/user';
 
 import * as localStorageIndexes from 'app/shared/const/localStorageIndexes';
 
@@ -25,19 +26,22 @@ var util = require('util');
 export class PlayersListComponent implements OnInit, OnDestroy {
   playersIndividualStats: any[]; //TODO USE PLAYER.PLAYERINFO INTERFACE         // Array containint all players with only one stat (ex: goals)
   private statNameFromAbreviation;                                  // Get stat name from abbreviation (ex: G = Goals)
-  currentStatString:string;
-  currentStatTag:string;
+  currentStatString: string;
+  currentStatTag: string;
   private subscription: Subscription;
   opponents: Opponent[];
-  
+  private currentUser: User;
+
   constructor(private http: Http,
-              private router: Router,
-              private serveStatService: PlayersIndividualStatsService,
-              private opponentService: OpponentsService,
-              private draftPlayerService: DraftPlayerService) {
-      this.subscription = opponentService.getAddOpponentEvent().subscribe(opponents => {
-          this.opponents = opponents;
-      })
+    private router: Router,
+    private serveStatService: PlayersIndividualStatsService,
+    private opponentService: OpponentsService,
+    private draftPlayerService: DraftPlayerService) {
+    this.subscription = opponentService.getAddOpponentEvent().subscribe(opponents => {
+      this.opponents = opponents;
+    })
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
   }
 
   ngOnInit() {
@@ -75,12 +79,12 @@ export class PlayersListComponent implements OnInit, OnDestroy {
     this.currentStatString = this.statNameFromAbreviation[statSelected];
     this.currentStatTag = statSelected;
     this.serveStatService.requestPlayersStats(this.currentStatString)
-                   .subscribe(
-                     stats => {
-                       this.playersIndividualStats = stats;
-                       this.saveData();
-                     });
-                     //error =>  this.errorMessage = <any>error); //TODO
+      .subscribe(
+      stats => {
+        this.playersIndividualStats = stats;
+        this.saveData();
+      });
+    //error =>  this.errorMessage = <any>error); //TODO
   }
 
   onPlayerSelect(player) {

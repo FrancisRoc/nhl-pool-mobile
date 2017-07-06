@@ -7,7 +7,7 @@ import { OpponentsService } from '../shared/services/opponentsService';
 import { StatsAttributes } from '../shared/interfaces/stats-attributes';
 import { ImportantStatsService } from '../shared/services/importantStatsService';
 import { UserService } from '../shared/services/user.service';
-import { IUserInfos } from '../shared/interfaces/userInfos';
+import { User } from '../shared/models/user';
 
 let util = require('util');
 
@@ -20,7 +20,7 @@ export class UserOverallStatsComponent implements OnInit, OnDestroy {
   isAddOpponentActivated: boolean;
   importantStatsAttrs: StatsAttributes[];                        // Attributes necessary from stats selected for pool
   opponents: Opponent[];
-  userInfos: IUserInfos = null;
+  currentUser: User;
 
   private opponentServiceSubscription: Subscription;
   private importantStatsServiceSubscription: Subscription;
@@ -35,6 +35,8 @@ export class UserOverallStatsComponent implements OnInit, OnDestroy {
       this.opponentServiceSubscription = opponentService.getAddOpponentEvent().subscribe(opponents => {
         this.opponents = opponents;
       });
+
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   ngOnInit() {

@@ -21,6 +21,9 @@
                 <span class="caret"></span>
               </button>
               <div class="dropdown-menu">
+                <div class="dropdown-row">
+                  <a class="dropdown-line"(click)="playerDraftBy(currentUser.username, playerStats?.player?.ID)" >{{currentUser.firstName}} {{currentUser.lastName}}</a>
+                </div>
                 <div class="dropdown-row" *ngFor="let opponent of opponents">
                   <a class="dropdown-line"(click)="playerDraftBy(opponent.name, playerStats?.player?.ID)" >{{opponent.name}}</a>
                 </div>
