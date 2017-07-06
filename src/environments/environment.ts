@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  loginCallback: "http://localhost:4200/callback"
+  loginCallback: "https://nhlpoolhelpermobile.herokuapp.com/callback"
 };
