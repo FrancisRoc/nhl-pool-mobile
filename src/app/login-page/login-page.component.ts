@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../shared/services/authentificationService';
 
 @Component({
   selector: 'app-login-page',
@@ -8,8 +7,7 @@ import { AuthService } from '../shared/services/authentificationService';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor(public authService: AuthService) {
-    authService.login();
+  constructor() {
   }
 
   ngOnInit() {

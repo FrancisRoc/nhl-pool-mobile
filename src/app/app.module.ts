@@ -21,20 +21,8 @@ import { OpponentsService } from '../app/shared/services/opponentsService';
 import { PlayersInfoService } from '../app/shared/services/playerInfoService';
 import { DraftPlayerService } from '../app/shared/services/draftPlayerService';
 import { UserInfosService } from '../app/shared/services/userInfosService';
-import { AuthService } from '../app/shared/services/authentificationService';
-import { AuthGuard } from '../app/autoGuard/authentificationGuard';
-import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
 import { LoginPageComponent } from './login-page/login-page.component';
-import { CallbackComponent } from './callback/callback.component';
-
-export function authHttpServiceFactory(http: Http, options: RequestOptions) {
-  return new AuthHttp(new AuthConfig({
-    tokenName: 'token',
-          tokenGetter: (() => localStorage.getItem('token')),
-          globalHeaders: [{'Content-Type':'application/json'}],
-     }), http, options);
-}
 
 @NgModule({
   declarations: [
@@ -50,7 +38,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     PlayerInfoPageComponent,
     DraftedPageComponent,
     LoginPageComponent,
-    CallbackComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,13 +52,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     PlayersInfoService,
     DraftPlayerService,
     UserInfosService,
-    AuthService,
-    AuthGuard,
-    {
-      provide: AuthHttp,
-      useFactory: authHttpServiceFactory,
-      deps: [Http, RequestOptions]
-    }
   ],
   bootstrap: [AppComponent]
 })
