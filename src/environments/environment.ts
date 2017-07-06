@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   loginCallback: "http://localhost:4200/callback",
-  apiUrl: 'http://localhost:4000'
+  apiUrl: 'http://localhost:4000/'
 };
