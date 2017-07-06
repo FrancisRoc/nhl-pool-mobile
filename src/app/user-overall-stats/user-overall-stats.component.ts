@@ -6,7 +6,7 @@ import { Opponent } from '../add-opponent-form/opponent';
 import { OpponentsService } from '../shared/services/opponentsService';
 import { StatsAttributes } from '../shared/interfaces/stats-attributes';
 import { ImportantStatsService } from '../shared/services/importantStatsService';
-import { UserInfosService } from '../shared/services/userInfosService';
+import { UserService } from '../shared/services/user.service';
 import { IUserInfos } from '../shared/interfaces/userInfos';
 
 let util = require('util');
@@ -24,11 +24,9 @@ export class UserOverallStatsComponent implements OnInit, OnDestroy {
 
   private opponentServiceSubscription: Subscription;
   private importantStatsServiceSubscription: Subscription;
-  private userInfosServiceSubscription: Subscription;
 
   constructor(private importantStatsService: ImportantStatsService,
-              private opponentService: OpponentsService,
-              private userInfosService: UserInfosService) {
+              private opponentService: OpponentsService) {
       this.importantStatsServiceSubscription = importantStatsService.getImportantStatsAttrsChangeEvent().subscribe(importantStatsAttrs => {
         console.log("Important stats in user overall section updated: " + util.inspect(importantStatsAttrs, false, null));
         this.importantStatsAttrs = importantStatsAttrs;
@@ -36,11 +34,6 @@ export class UserOverallStatsComponent implements OnInit, OnDestroy {
 
       this.opponentServiceSubscription = opponentService.getAddOpponentEvent().subscribe(opponents => {
         this.opponents = opponents;
-      });
-
-      this.userInfosServiceSubscription = userInfosService.getUserInfosSubjectEvent().subscribe(userInfos => {
-        console.log("User infos in user overall section updated: " + util.inspect(userInfos, false, null));
-        this.userInfos = userInfos;
       });
   }
 
@@ -54,7 +47,6 @@ export class UserOverallStatsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.opponentServiceSubscription.unsubscribe();
     this.importantStatsServiceSubscription.unsubscribe();
-    this.userInfosServiceSubscription.unsubscribe();
   }
 
   onAddOpponentButtonClick() {

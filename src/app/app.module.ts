@@ -20,9 +20,13 @@ import { ImportantStatsService } from '../app/shared/services/importantStatsServ
 import { OpponentsService } from '../app/shared/services/opponentsService';
 import { PlayersInfoService } from '../app/shared/services/playerInfoService';
 import { DraftPlayerService } from '../app/shared/services/draftPlayerService';
-import { UserInfosService } from '../app/shared/services/userInfosService';
+import { UserService } from '../app/shared/services/user.service';
+import { AuthenticationService } from '../app/shared/services/authentification.service';
+import { CustomHttp } from '../app/shared/services/http/custom-http';
+import { AuthGuard } from '../app/autoGuard/auth.guard';
 
 import { LoginPageComponent } from './login-page/login-page.component';
+import { RegisterPageComponent } from './register-page/register-page.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +42,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
     PlayerInfoPageComponent,
     DraftedPageComponent,
     LoginPageComponent,
+    RegisterPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,10 @@ import { LoginPageComponent } from './login-page/login-page.component';
     ImportantStatsService,
     PlayersInfoService,
     DraftPlayerService,
-    UserInfosService,
+    UserService,
+    AuthenticationService,
+    CustomHttp,
+    AuthGuard,
   ],
   bootstrap: [AppComponent]
 })
