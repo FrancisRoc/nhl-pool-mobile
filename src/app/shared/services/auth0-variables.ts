@@ -12,6 +12,6 @@ export const AUTH_CONFIG: AuthConfig = {
   CLIENT_ID: 'rlX94MCWFLhDAp80Jm1HlilNA54zRN9l',
   CLIENT_DOMAIN: 'nhlpoolhelper.auth0.com',
   AUDIENCE: 'nhl-pool-helper-api',
-  REDIRECT: environment.loginCallback,
+  REDIRECT: 'http://nhlpoolhelpermobile.herokuapp.com/callback',
   SCOPE: 'openid profile'
 };
