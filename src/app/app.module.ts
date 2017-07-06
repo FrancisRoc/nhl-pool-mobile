@@ -24,7 +24,6 @@ import { UserInfosService } from '../app/shared/services/userInfosService';
 import { AuthService } from '../app/shared/services/authentificationService';
 import { AuthGuard } from '../app/autoGuard/authentificationGuard';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
-import { AUTH_PROVIDERS } from 'angular2-jwt';
 
 import { LoginPageComponent } from './login-page/login-page.component';
 import { CallbackComponent } from './callback/callback.component';
@@ -72,8 +71,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
       deps: [Http, RequestOptions]
-    },
-    ...AUTH_PROVIDERS,
+    }
   ],
   bootstrap: [AppComponent]
 })
