@@ -16,7 +16,7 @@ const appRoutes: Routes = [
   { path: 'login', component :LoginPageComponent },
   { path: 'callback', component: CallbackComponent },
   { path: 'playerInfo/:id', component: PlayerInfoPageComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 
