@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  loginCallback: "http://nhlpoolhelpermobile.herokuapp.com/callback"
+  loginCallback: "https://nhlpoolhelpermobile.herokuapp.com/callback"
 };
