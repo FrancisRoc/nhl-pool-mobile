@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthenticationService } from '../shared/services/authentification.service';
+import { AlertService } from '../shared/services/alert.service';
 import { UserService } from '../shared/services/user.service';
 import { User } from '../shared/models/user';
 
@@ -17,7 +18,8 @@ export class LoginPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
     // reset login status
@@ -32,7 +34,8 @@ export class LoginPageComponent implements OnInit {
         this.router.navigate(['home']);
       },
       error => {
-        //Alert service TODO?
+        console.log("Login error");
+        this.alertService.error(error);
         this.loading = false;
       });
   }

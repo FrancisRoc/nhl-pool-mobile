@@ -1,9 +1,11 @@
-<form #opponentForm="ngForm" (ngSubmit)="onSubmit(opponentForm)">
+<form name="form" (ngSubmit)="opponentForm.form.valid && onSubmit(opponentForm)" #opponentForm="ngForm" novalidate>
+  <div class="form-group-inputs" [ngClass]="{ 'has-error': opponentForm.submitted && !opponent.valid }">
+    <label for="fullName">Full Name: </label>
+    <input type="text" class="form-control" name="opponent" placeholder="Enter name..." [(ngModel)]="model.opponent" #opponent="ngModel" required />
+    <div *ngIf="opponentForm.submitted && !opponent.valid" class="help-block">Name is required</div>
+  </div>
   <div class="form-group">
-    <input type="text" class="form-control" id="oppName" placeholder="Enter name..." required [(ngModel)]="model.name" name="name" #name="ngModel">
-    <button type="submit" [disabled]="!opponentForm.form.valid"><img src="../../../assets/next.png" alt="Arrow Icon"></button>
-    <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-      Name is required
-    </div>
+    <button class="btn btn-primary btn-add">Add</button>
+    <button class="btn btn-primary btn-cancel" (click)="cancel()">Cancel</button>
   </div>
 </form>

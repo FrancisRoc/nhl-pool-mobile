@@ -15,10 +15,19 @@
       border-bottom: 1px solid #ddd;
       height: 2em;
       padding: 12px;
+      font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+      letter-spacing: 1px;
+  }
+
+  .player-list a {
+    color: black;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    letter-spacing: 1px;
   }
 
   /* Striped table */
-  tr:nth-child(even) {background-color: #dfe3ee}
+  tr:nth-child(even) {background-color: #EF9A9A}
 
   /* Style The Dropdown Button */
 .dropbtn {
@@ -54,9 +63,9 @@
   display: block;
   color: black;
   text-align: center;
-  padding: 8px 16px;
+  padding: 7px;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 /* Show the dropdown menu on hover */
@@ -77,10 +86,10 @@
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
-    background-color: #f7f7f7;
+    background-color: white;
 }
 
 /* Change color of dropdown links on hover */
 .dropdown-menu .dropdown-line:hover {
-  background-color: #dfe3ee;
+  background-color: #EF9A9A;
 }

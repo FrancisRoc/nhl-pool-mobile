@@ -12,7 +12,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let playerStats of playersIndividualStats">
-          <td><a (click)="onPlayerSelect(playerStats)">{{playerStats?.player?.FirstName}} {{playerStats?.player?.LastName}}</a></td>
+          <td class="player-link"><a (click)="onPlayerSelect(playerStats)">{{playerStats?.player?.FirstName}} {{playerStats?.player?.LastName}}</a></td>
           <td>{{playerStats?.stats?.gamesPlayed}}</td>
           <td>{{playerStats?.stats?.stats[currentStatString]}}</td>
           <td>

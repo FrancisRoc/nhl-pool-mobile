@@ -22,11 +22,13 @@ import { PlayersInfoService } from '../app/shared/services/playerInfoService';
 import { DraftPlayerService } from '../app/shared/services/draftPlayerService';
 import { UserService } from '../app/shared/services/user.service';
 import { AuthenticationService } from '../app/shared/services/authentification.service';
+import { AlertService } from '../app/shared/services/alert.service';
 import { CustomHttp } from '../app/shared/services/http/custom-http';
 import { AuthGuard } from '../app/autoGuard/auth.guard';
 
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { AlertComponent } from './shared/component/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     DraftedPageComponent,
     LoginPageComponent,
     RegisterPageComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     DraftPlayerService,
     UserService,
     AuthenticationService,
+    AlertService,
     CustomHttp,
     AuthGuard,
   ],

@@ -1,3 +1,9 @@
+<div>
+  <h4>
+    Your section
+  </h4>
+</div>
+
 <div class="panel panel-default">
   <div class="panel-heading">{{currentUser.firstName}} {{currentUser.lastName}}</div>
   <div class="panel-body">
@@ -13,10 +19,10 @@
 </div>
 
 <div>
-  <h2 class="addOpponent">
-    Add Opponent
-  </h2>
-  <button class="plusButton" (click)="onAddOpponentButtonClick()"><img src="../../../assets/plus.png" alt="Plus button"></button>
+  <h4>
+    Opponent section
+  </h4>
+  <i class="fa fa-plus-circle fa-3x" aria-hidden="true" (click)="onAddOpponentButtonClick()"></i>
   <app-add-opponent-form *ngIf="isAddOpponentActivated" [(showForm)]="isAddOpponentActivated"></app-add-opponent-form>
 </div>
 

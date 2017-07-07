@@ -1,8 +1,10 @@
   .panel > .panel-heading {
     background-image: none;
-    background-color: #dfe3ee;
-    color: black;
-    font-size: 200%;
+    background-color: #d32f2f;
+    color: white;
+    font-size: 1.5em;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    letter-spacing: 1px;
   }
 
   .player-infos {
@@ -15,13 +17,17 @@
       border-collapse: collapse;
       border: 1px solid #ddd;
       width: 100%;
+      font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+      letter-spacing: 1px;
   }
 
   th, td {
       border-bottom: 1px solid #ddd;
       height: 2em;
       padding: 12px;
+      font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+      letter-spacing: 1px;
   }
 
   /* Striped table */
-  tr:nth-child(even) {background-color: #dfe3ee}
+  tr:nth-child(even) {background-color: #ef9a9a}

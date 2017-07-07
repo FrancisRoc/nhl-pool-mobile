@@ -20,9 +20,13 @@ export class AddOpponentFormComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log("Add opponent: " + form.value);
-    this.opponentsService.addOpponent(form.value);
+    console.log("Add opponent: " + form.value.opponent);
+    this.opponentsService.addOpponent(new Opponent(form.value.opponent));
     this.showFormChange.emit(!this.showForm);
     form.resetForm();
+  }
+
+  cancel() {
+    this.showFormChange.emit(!this.showForm);
   }
 }
