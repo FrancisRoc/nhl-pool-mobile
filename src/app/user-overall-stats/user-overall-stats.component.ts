@@ -37,6 +37,7 @@ export class UserOverallStatsComponent implements OnInit, OnDestroy {
       });
 
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      console.log(this.currentUser);
   }
 
   ngOnInit() {

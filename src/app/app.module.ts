@@ -23,6 +23,7 @@ import { DraftPlayerService } from '../app/shared/services/draftPlayerService';
 import { UserService } from '../app/shared/services/user.service';
 import { AuthenticationService } from '../app/shared/services/authentification.service';
 import { AlertService } from '../app/shared/services/alert.service';
+import { UserSearchService } from '../app/shared/services/user-search.service';
 import { CustomHttp } from '../app/shared/services/http/custom-http';
 import { AuthGuard } from '../app/autoGuard/auth.guard';
 
@@ -62,6 +63,7 @@ import { AlertComponent } from './shared/component/alert/alert.component';
     UserService,
     AuthenticationService,
     AlertService,
+    UserSearchService,
     CustomHttp,
     AuthGuard,
   ],
