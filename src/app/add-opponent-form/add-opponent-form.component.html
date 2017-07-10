@@ -7,9 +7,12 @@
          (click)="addOpponent(user)" class="search-result" >
          {{user.name}} ({{user.username}})
     </div>
+    <div *ngIf="users.length === 0" class="search-result">
+         Cannot find any users
+    </div>
   </div>
   <div class="form-group">
-    <button class="btn btn-primary btn-add">Add</button>
+    <!--<button class="btn btn-primary btn-add">Add</button>-->
     <button class="btn btn-primary btn-cancel" (click)="cancel()">Cancel</button>
   </div>
 </form>

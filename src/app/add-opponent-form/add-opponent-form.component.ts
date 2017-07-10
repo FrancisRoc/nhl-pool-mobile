@@ -29,7 +29,7 @@ export class AddOpponentFormComponent implements OnInit {
   users: Observable<User[]>;
   private searchTerms = new Subject<string>();
 
-  model = new Opponent('');
+  model = new Opponent('', '');
 
   constructor(private opponentsService: OpponentsService, private userSearchService: UserSearchService) { }
 
@@ -51,7 +51,7 @@ export class AddOpponentFormComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     console.log("Add opponent: " + form.value.opponent);
-    this.opponentsService.addOpponent(new Opponent(form.value.opponent));
+    //TODO THINK this.opponentsService.addOpponent(new Opponent(form.value.opponent, form.value.));
     this.showFormChange.emit(!this.showForm);
     form.resetForm();
   }
@@ -61,12 +61,13 @@ export class AddOpponentFormComponent implements OnInit {
   }
 
   addOpponent(user: User) {
-    this.opponentsService.addOpponent(new Opponent(user.name));
+    this.opponentsService.addOpponent(new Opponent(user.name, user.username));
     this.showFormChange.emit(!this.showForm);    
   }
 
   search(term: string): void {
     console.log("search opponent matching: " + term);
+    console.log(this.users.count);
     this.searchTerms.next(term);
   }
 }
