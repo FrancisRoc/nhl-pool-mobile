@@ -7,11 +7,13 @@ import { PlayerInfoPageComponent } from '../../app/player-info-page/player-info-
 import { DraftedPageComponent } from '../../app/drafted-page/drafted-page.component';
 import { LoginPageComponent } from '../../app/login-page/login-page.component';
 import { RegisterPageComponent } from '../../app/register-page/register-page.component';
+import { PoolPresetationPageComponent } from '../../app/pool-presetation-page/pool-presetation-page.component';
 
 import { AuthGuard } from '../autoGuard/auth.guard';
 
 const appRoutes: Routes = [
-  { path: 'home/drafted', component: DraftedPageComponent },
+  { path: 'drafted', component: DraftedPageComponent },
+  { path: 'pools', component: PoolPresetationPageComponent },
   { path: 'home', component: HomePageComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },

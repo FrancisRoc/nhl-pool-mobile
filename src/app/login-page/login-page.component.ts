@@ -31,7 +31,7 @@ export class LoginPageComponent implements OnInit {
     this.authenticationService.login(this.model.username, this.model.password)
       .subscribe(
       data => {
-        this.router.navigate(['home']);
+        this.router.navigate(['pools']);
       },
       error => {
         console.log("Login error");

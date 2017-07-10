@@ -30,6 +30,7 @@ import { AuthGuard } from '../app/autoGuard/auth.guard';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { AlertComponent } from './shared/component/alert/alert.component';
+import { PoolPresetationPageComponent } from './pool-presetation-page/pool-presetation-page.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { AlertComponent } from './shared/component/alert/alert.component';
     LoginPageComponent,
     RegisterPageComponent,
     AlertComponent,
+    PoolPresetationPageComponent,
   ],
   imports: [
     BrowserModule,
