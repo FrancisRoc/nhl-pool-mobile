@@ -31,18 +31,47 @@ label {
     background: #dddddd;
 }
 
-.search-result{
-  border-bottom: 1px solid gray;
-  border-left: 1px solid gray;
-  border-right: 1px solid gray;
-  width:195px;
-  height: 16px;
-  padding: 5px;
-  background-color: white;
-  cursor: pointer;
+.search-result {
+  height: 30px;
+  width: 50%;
+  list-style: none;
+  color: rgb(105, 105, 105);
+  border: 1px solid #ccc;
+  border-top: none;
+  /*so things don't jump around*/
+  position: absolute;
+  left: 23%;
+  overflow-y: auto;
+  background: #fff;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  letter-spacing: 1px;
 }
- 
+
 .search-result:hover {
   color: #eee;
-  background-color: #607D8B;
+  background-color: #EF9A9A;
+}
+
+.opponent-name {
+  margin-left: 15px;
+  display: inline-block;
+  position: absolute;
+}
+
+ ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+ }
+
+ li {
+  margin: 0;
+  padding: 0;
+ }
+
+ a {
+  color: black;
+  text-decoration: none; /* no underline */
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+letter-spacing: 1px;
 }

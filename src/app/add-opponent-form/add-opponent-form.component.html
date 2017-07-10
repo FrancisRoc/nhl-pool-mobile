@@ -1,14 +1,14 @@
 <form name="form" (ngSubmit)="opponentForm.form.valid && onSubmit(opponentForm)" #opponentForm="ngForm" novalidate>
   <div class="form-group-inputs" [ngClass]="{ 'has-error': opponentForm.submitted && !opponent.valid }">
     <label for="fullName">Full Name: </label>
-    <input id="search-box" (keyup)="search(opponent.value)" type="text" class="form-control" name="opponent" placeholder="Enter name..." [(ngModel)]="model.opponent" #opponent="ngModel" required />
+    <input id="search-box" (keyup)="search(opponent.value)" type="text" class="form-control" name="opponent" placeholder="Enter name..."
+      [(ngModel)]="model.opponent" #opponent="ngModel" required />
     <div *ngIf="opponentForm.submitted && !opponent.valid" class="help-block">Name is required</div>
-    <div *ngFor="let user of users | async"
-         (click)="addOpponent(user)" class="search-result" >
-         {{user.name}} ({{user.username}})
+    <div class="search-result" *ngFor="let user of users | async" (click)="addOpponent(user)">
+      <p class="opponent-name"> {{user.name}} ({{user.username}}) </p>
     </div>
-    <div *ngIf="users.length === 0" class="search-result">
-         Cannot find any users
+    <div class="search-result" *ngIf="(users | async)?.length == 0">
+      <p class="opponent-name"> Cannot find any user </p>
     </div>
   </div>
   <div class="form-group">
