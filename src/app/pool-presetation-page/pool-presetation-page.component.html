@@ -1,2 +1,41 @@
 <tool-bar></tool-bar>
 <app-header></app-header>
+
+<div class="container equal">
+  <div class="col-sm-3 col-md-3 col-lg-3">
+    <div class="panel panel-default panel-new">
+      <div class="panel-heading">New pool</div>
+      <div class="panel-body">
+        <i class="fa fa-plus fa-5x" aria-hidden="true" (click)="openNav()"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-3 col-md-3 col-lg-3" *ngFor="let pool of pools">
+    <div class="panel panel-default">
+      <div class="panel-heading">{{pool}}</div>
+      <div class="panel-body">
+        {{pool}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The overlay -->
+<div id="myNav" class="overlay" *ngIf="showAddOppForm">
+  <!-- Overlay content -->
+  <div class="overlay-content">
+    <div class="container">
+        <div class="panel panel-default">
+          <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+          <div class="panel-body">
+            <h2>Add opponent</h2>
+            <br>
+            <app-search-opponent-component> </app-search-opponent-component>
+          </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+

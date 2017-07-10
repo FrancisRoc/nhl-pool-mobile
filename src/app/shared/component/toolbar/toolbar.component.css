@@ -1,6 +1,7 @@
 .active {
-  background-color: #222;
-  border-radius: 8px;
+  border-bottom-style: solid;
+  border-bottom-color: #222;
+  margin-bottom: 0px;
 }
 
 .navbar-default {

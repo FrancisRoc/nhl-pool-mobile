@@ -26,27 +26,9 @@ export class AddOpponentFormComponent implements OnInit {
   @Output() showFormChange = new EventEmitter<boolean>();
   @Input() showForm;
 
-  users: Observable<User[]>;
-  private searchTerms = new Subject<string>();
-
-  model = new Opponent('', '');
-
   constructor(private opponentsService: OpponentsService, private userSearchService: UserSearchService) { }
 
   ngOnInit() {
-    this.users = this.searchTerms
-      .debounceTime(300)        // wait 300ms after each keystroke before considering the term
-      .distinctUntilChanged()   // ignore if next search term is same as previous
-      .switchMap(term => term   // switch to new observable each time the term changes
-        // return the http search observable
-        ? this.userSearchService.search(term)
-        // or the observable of empty users if there was no search term
-        : Observable.of<User[]>([]))
-      .catch(error => {
-        // TODO: add real error handling
-        console.log(error);
-        return Observable.of<User[]>([]);
-      });
   }
 
   onSubmit(form: NgForm) {
@@ -62,12 +44,6 @@ export class AddOpponentFormComponent implements OnInit {
 
   addOpponent(user: User) {
     this.opponentsService.addOpponent(new Opponent(user.name, user.username));
-    this.showFormChange.emit(!this.showForm);    
-  }
-
-  search(term: string): void {
-    console.log("search opponent matching: " + term);
-    console.log(this.users.count);
-    this.searchTerms.next(term);
+    this.showFormChange.emit(!this.showForm);
   }
 }
