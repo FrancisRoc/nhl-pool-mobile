@@ -23,6 +23,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 export class PoolPresetationPageComponent implements OnInit {
   pools = ["test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8",];
   showAddOppForm = false;
+  showSearchResult = true;
   model: any = {};
   myForm: FormGroup; // our form model
   memberModel = new Opponent('', '', '');
@@ -96,9 +97,9 @@ export class PoolPresetationPageComponent implements OnInit {
   }
 
   selectMember(index: number, user: User): void {
-    console.log(this.myForm.controls["members"].value[index].fullName);
-    console.log("for: " + user.name);
-    //this.myForm.controls["members"].value[index].fullName = user.name;
+    const control = <FormArray>this.myForm.controls['members'];
+    control.at(index).patchValue({ fullName: user.name });
+    this.showSearchResult = !this.showSearchResult;
   }
 
   createPool(form: FormGroup) {

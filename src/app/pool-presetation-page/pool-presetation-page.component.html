@@ -59,8 +59,10 @@
                   <div class="form-group">
                     <input id="search-box" (keyup)="search('', i)" type="text" class="form-control" placeholder="Enter name..." formControlName="fullName"
                       required autocomplete="off" />
-                    <div class="search-result" *ngFor="let user of users | async" (click)="selectMember(i, user)">
-                      <p class="opponent-name"> {{user.name}} ({{user.username}}) </p>
+                    <div *ngIf="showSearchResult">
+                      <div class="search-result" *ngFor="let user of users | async" (click)="selectMember(i, user)">
+                        <p class="member-name"> {{user.name}} ({{user.username}}) </p>
+                      </div>
                     </div>
                     <!--display error message if street is not valid-->
                     <small [hidden]="myForm.controls.members.controls[i].controls.fullName.valid">
