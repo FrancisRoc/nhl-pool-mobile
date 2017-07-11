@@ -13,16 +13,13 @@ input[type="text"] {
 }
 
 .search-result {
+  position: relative; right: 0; padding: 0; overflow: hidden;
   height: 30px;
-  width: 50%;
   list-style: none;
   color: rgb(105, 105, 105);
   border: 1px solid #ccc;
   border-top: none;
   /*so things don't jump around*/
-  position: absolute;
-  left: 23%;
-  overflow-y: auto;
   background: #fff;
   font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
   letter-spacing: 1px;
@@ -34,9 +31,8 @@ input[type="text"] {
 }
 
 .opponent-name {
-  margin-left: 15px;
-  display: inline-block;
-  position: absolute;
+  margin-top: 2%;
+  margin-left: 4%;
 }
 
  ul {
