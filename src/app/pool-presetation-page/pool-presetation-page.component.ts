@@ -64,20 +64,15 @@ export class PoolPresetationPageComponent implements OnInit {
   }
 
   addMember() {
-    // add address to the list
+    // add member to the list
     const control = <FormArray>this.myForm.controls['members'];
     control.push(this.initMember());
   }
 
   removeMember(i: number) {
-    // remove address from the list
+    // remove member from the list
     const control = <FormArray>this.myForm.controls['members'];
     control.removeAt(i);
-  }
-
-  addPool() {
-    console.log("Open pool creation dialog...");
-
   }
 
   /* Open */
@@ -104,6 +99,9 @@ export class PoolPresetationPageComponent implements OnInit {
     console.log(this.myForm.controls["members"].value[index].fullName);
     console.log("for: " + user.name);
     //this.myForm.controls["members"].value[index].fullName = user.name;
+  }
+
+  createPool(form: FormGroup) {
   }
 
 }

@@ -29,33 +29,34 @@
       <div class="panel panel-default">
         <a type="button" href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
         <div class="panel-body panel-form">
-          <h2>Add pool members</h2>
-          <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
+          <br>
+          <form [formGroup]="myForm" novalidate (ngSubmit)="createPool(myForm)">
             <!-- name -->
             <div class="form-group">
               <label>Pool Name</label>
-              <input type="text" formControlName="poolName">
+              <input type="text" formControlName="poolName" class="form-control" placeholder="Enter pool name...">
               <!--display error message if name is not valid-->
               <small [hidden]="myForm.controls.poolName.valid">
             Pool Name is required.
         </small>
             </div>
 
-            <!-- list of addresses -->
+            <br>
+            <!-- list of members -->
+            <h2>Pool Members</h2>
             <div formArrayName="members">
               <div *ngFor="let member of myForm.controls.members.controls; let i=index">
                 <!-- address header, show remove button when more than one address available -->
-                <div>
-                  <span>Member {{i + 1}}</span>
-                  <span *ngIf="myForm.controls.members.controls.length > 1" (click)="removeMember(i)">X
+                <div class="member">
+                  <label class="title">Member {{i + 1}}</label>
+                  <span class="remove" *ngIf="myForm.controls.members.controls.length > 1" (click)="removeMember(i)">X
                 </span>
                 </div>
 
                 <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
                 <div [formGroupName]="i">
                   <!--street-->
-                  <div>
-                    <label>Member Name</label>
+                  <div class="form-group">
                     <input id="search-box" (keyup)="search('', i)" type="text" class="form-control" placeholder="Enter name..." formControlName="fullName"
                       required autocomplete="off" />
                     <div class="search-result" *ngFor="let user of users | async" (click)="selectMember(i, user)">
@@ -65,18 +66,20 @@
                     <small [hidden]="myForm.controls.members.controls[i].controls.fullName.valid">
                         Member Name is required
                     </small>
+                    <br>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="margin-20">
-              <a (click)="addMember()" style="cursor: default">
+            <div class="add-member">
+              <a (click)="addMember()" style="cursor: pointer">
             Add another member +
           </a>
             </div>
-
-            <div class="margin-20">
-              <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Create Pool</button>
+            <br>
+            <div class="button">
+              <button type="submit" class="btn btn-primary btn-create" [disabled]="!myForm.valid">Create Pool</button>
+              <button type="button" class="btn btn-primary" (click)="closeNav()">Cancel</button>
             </div>
           </form>
         </div>

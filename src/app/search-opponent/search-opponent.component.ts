@@ -57,4 +57,8 @@ export class SearchOpponentComponent implements OnInit {
     this.opponentsService.addOpponent(new Opponent(user._id, user.name, user.username));
     this.addOpponentForm.emit();
   }
+
+  onSubmit(form: NgForm) {
+    //No submit button for now
+  }
 }
