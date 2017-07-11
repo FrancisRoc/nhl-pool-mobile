@@ -100,4 +100,10 @@ export class PoolPresetationPageComponent implements OnInit {
     this.searchTerms.next(term);
   }
 
+  selectMember(index: number, user: User): void {
+    console.log(this.myForm.controls["members"].value[index].fullName);
+    console.log("for: " + user.name);
+    //this.myForm.controls["members"].value[index].fullName = user.name;
+  }
+
 }

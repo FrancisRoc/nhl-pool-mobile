@@ -58,7 +58,7 @@
                     <label>Member Name</label>
                     <input id="search-box" (keyup)="search('', i)" type="text" class="form-control" placeholder="Enter name..." formControlName="fullName"
                       required autocomplete="off" />
-                    <div class="search-result" *ngFor="let user of users | async">
+                    <div class="search-result" *ngFor="let user of users | async" (click)="selectMember(i, user)">
                       <p class="opponent-name"> {{user.name}} ({{user.username}}) </p>
                     </div>
                     <!--display error message if street is not valid-->
