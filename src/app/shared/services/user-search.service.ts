@@ -28,12 +28,8 @@ export class UserSearchService {
       .get(environment.apiUrl + `api/nhl/poolApp/v1/users?name=${term}`)
       .map(response => {
         let allUsers: User[] = response.json();
-        console.log(allUsers);
-        let excludeCurrentUser: User[] = allUsers.filter(item => item.username !== this.currentUser.username)
-        console.log(excludeCurrentUser);
+        let excludeCurrentUser: User[] = allUsers.filter(item => item.username !== this.currentUser.username);
         for (let i = 0; i < this.opponents.length; i++) {
-          console.log("Opponent to filter: " + this.opponents[i].username);
-          console.log(excludeCurrentUser);
           excludeCurrentUser = excludeCurrentUser.filter(item => item.username !== this.opponents[i].username);
         }
         return excludeCurrentUser as User[] 

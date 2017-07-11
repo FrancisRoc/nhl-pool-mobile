@@ -43,7 +43,7 @@ export class AddOpponentFormComponent implements OnInit {
   }
 
   addOpponent(user: User) {
-    this.opponentsService.addOpponent(new Opponent(user.name, user.username));
+    this.opponentsService.addOpponent(new Opponent(user._id, user.name, user.username));
     this.showFormChange.emit(!this.showForm);
   }
 }

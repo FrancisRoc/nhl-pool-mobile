@@ -27,11 +27,58 @@
   <div class="overlay-content">
     <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
       <div class="panel panel-default">
-        <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
-        <div class="panel-body">
-          <h2>Add opponent</h2>
-          <br>
-          <app-search-opponent-component> </app-search-opponent-component>
+        <a type="button" href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+        <div class="panel-body panel-form">
+          <h2>Add pool members</h2>
+          <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
+            <!-- name -->
+            <div class="form-group">
+              <label>Pool Name</label>
+              <input type="text" formControlName="poolName">
+              <!--display error message if name is not valid-->
+              <small [hidden]="myForm.controls.poolName.valid">
+            Pool Name is required.
+        </small>
+            </div>
+
+            <!-- list of addresses -->
+            <div formArrayName="members">
+              <div *ngFor="let member of myForm.controls.members.controls; let i=index">
+                <!-- address header, show remove button when more than one address available -->
+                <div>
+                  <span>Member {{i + 1}}</span>
+                  <span *ngIf="myForm.controls.members.controls.length > 1" (click)="removeMember(i)">X
+                </span>
+                </div>
+
+                <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
+                <div [formGroupName]="i">
+                  <!--street-->
+                  <div>
+                    <label>Member Name</label>
+                    <input id="search-box" (keyup)="search('', i)" type="text" class="form-control" placeholder="Enter name..." formControlName="fullName"
+                      required autocomplete="off" />
+                    <div class="search-result" *ngFor="let user of users | async">
+                      <p class="opponent-name"> {{user.name}} ({{user.username}}) </p>
+                    </div>
+                    <!--display error message if street is not valid-->
+                    <small [hidden]="myForm.controls.members.controls[i].controls.fullName.valid">
+                        Member Name is required
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="margin-20">
+              <a (click)="addMember()" style="cursor: default">
+            Add another member +
+          </a>
+            </div>
+
+            <div class="margin-20">
+              <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Create Pool</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

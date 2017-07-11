@@ -27,7 +27,7 @@ export class SearchOpponentComponent implements OnInit {
   users: Observable<User[]>;
   private searchTerms = new Subject<string>();
 
-  model = new Opponent('', '');
+  model = new Opponent('', '', '');
 
   constructor(private opponentsService: OpponentsService, private userSearchService: UserSearchService) { }
 
@@ -54,7 +54,7 @@ export class SearchOpponentComponent implements OnInit {
   }
 
   addOpponent(user: User) {
-    this.opponentsService.addOpponent(new Opponent(user.name, user.username));
+    this.opponentsService.addOpponent(new Opponent(user._id, user.name, user.username));
     this.addOpponentForm.emit();
   }
 }

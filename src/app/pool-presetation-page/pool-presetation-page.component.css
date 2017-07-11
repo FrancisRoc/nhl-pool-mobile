@@ -12,6 +12,10 @@
   height: 150px;
 }
 
+.panel-form {
+  height: 100%;
+}
+
 .panel-new {
   text-align: center;
 }
