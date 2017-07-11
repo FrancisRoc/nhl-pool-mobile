@@ -1,25 +1,7 @@
-.form-group-inputs {
-  display: inline-block;
-}
-
-input[type="text"] {
-  display: inline-block;
-  width: 20em;
-  height: 2.15em;
-}
-
-label {
-  margin-right: 2em;
-}
-
 .btn-primary {
   margin-top: 1em;
   height: 2.15em;
   background-color: black;
-}
-
-.help-block {
-  margin-left: 7.4em;
 }
 
 .btn-primary:not([disabled]):hover {

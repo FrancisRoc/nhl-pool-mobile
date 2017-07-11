@@ -1,0 +1,91 @@
+<tool-bar></tool-bar>
+<app-header></app-header>
+
+<div class="container equal">
+  <div class="col-sm-3 col-md-3 col-lg-3">
+    <div class="panel panel-default panel-new">
+      <div class="panel-heading">New pool</div>
+      <div class="panel-body">
+        <i class="fa fa-plus fa-5x" aria-hidden="true" (click)="openNav()"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-3 col-md-3 col-lg-3" *ngFor="let pool of pools">
+    <div class="panel panel-default">
+      <div class="panel-heading">{{pool}}</div>
+      <div class="panel-body">
+        {{pool}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The overlay -->
+<div id="myNav" class="overlay" *ngIf="showAddOppForm">
+  <!-- Overlay content -->
+  <div class="overlay-content">
+    <div class="col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+      <div class="panel panel-default">
+        <a type="button" href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+        <div class="panel-body panel-form">
+          <br>
+          <form [formGroup]="myForm" novalidate (ngSubmit)="createPool(myForm)">
+            <!-- name -->
+            <div class="form-group">
+              <label>Pool Name</label>
+              <input type="text" formControlName="poolName" class="form-control" placeholder="Enter pool name...">
+              <!--display error message if name is not valid-->
+              <small [hidden]="myForm.controls.poolName.valid">
+            Pool Name is required.
+        </small>
+            </div>
+
+            <br>
+            <!-- list of members -->
+            <h2>Pool Members</h2>
+            <div formArrayName="members">
+              <div *ngFor="let member of myForm.controls.members.controls; let i=index">
+                <!-- address header, show remove button when more than one address available -->
+                <div class="member">
+                  <label class="title">Member {{i + 1}}</label>
+                  <span class="remove" *ngIf="myForm.controls.members.controls.length > 1" (click)="removeMember(i)">X
+                </span>
+                </div>
+
+                <!-- Angular assigns array index as group name by default 0, 1, 2, ... -->
+                <div [formGroupName]="i">
+                  <!--street-->
+                  <div class="form-group">
+                    <input id="search-box" (focus)="onFocus(i)" (keyup)="search('', i)" type="text" class="form-control" placeholder="Enter name..." formControlName="fullName"
+                      required autocomplete="off" />
+                    <div *ngIf="myForm.controls.members.controls[i].controls.fullName.valid && inputsOnFocus[i]">
+                      <div class="search-result" *ngFor="let user of users | async" (click)="selectMember(i, user)">
+                        <p class="member-name"> {{user.name}} ({{user.username}}) </p>
+                      </div>
+                    </div>
+                    <!--display error message if street is not valid-->
+                    <small [hidden]="myForm.controls.members.controls[i].controls.fullName.valid">
+                        Member Name is required
+                    </small>
+                    <br>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="add-member">
+              <a (click)="addMember()" style="cursor: pointer">
+            Add another member +
+          </a>
+            </div>
+            <br>
+            <div class="button">
+              <button type="submit" class="btn btn-primary btn-create" [disabled]="!myForm.valid">Create Pool</button>
+              <button type="button" class="btn btn-primary" (click)="closeNav()">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
