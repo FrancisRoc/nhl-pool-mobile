@@ -57,9 +57,9 @@
                 <div [formGroupName]="i">
                   <!--street-->
                   <div class="form-group">
-                    <input id="search-box" (keyup)="search('', i)" type="text" class="form-control" placeholder="Enter name..." formControlName="fullName"
+                    <input id="search-box" (focus)="onFocus(i)" (keyup)="search('', i)" type="text" class="form-control" placeholder="Enter name..." formControlName="fullName"
                       required autocomplete="off" />
-                    <div *ngIf="showSearchResult">
+                    <div *ngIf="myForm.controls.members.controls[i].controls.fullName.valid && inputsOnFocus[i]">
                       <div class="search-result" *ngFor="let user of users | async" (click)="selectMember(i, user)">
                         <p class="member-name"> {{user.name}} ({{user.username}}) </p>
                       </div>

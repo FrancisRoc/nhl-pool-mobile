@@ -22,8 +22,8 @@ import 'rxjs/add/operator/distinctUntilChanged';
 })
 export class PoolPresetationPageComponent implements OnInit {
   pools = ["test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8",];
+  inputsOnFocus: boolean[] = [];
   showAddOppForm = false;
-  showSearchResult = true;
   model: any = {};
   myForm: FormGroup; // our form model
   memberModel = new Opponent('', '', '');
@@ -58,13 +58,15 @@ export class PoolPresetationPageComponent implements OnInit {
   }
 
   initMember() {
-    // initialize our address
+    // initialize our member
+    this.inputsOnFocus.push(false);
     return this._fb.group({
-      fullName: ['', Validators.required]
+      fullName: ['', Validators.required],
     });
   }
 
   addMember() {
+    this.inputsOnFocus.push(false);
     // add member to the list
     const control = <FormArray>this.myForm.controls['members'];
     control.push(this.initMember());
@@ -98,11 +100,21 @@ export class PoolPresetationPageComponent implements OnInit {
 
   selectMember(index: number, user: User): void {
     const control = <FormArray>this.myForm.controls['members'];
-    control.at(index).patchValue({ fullName: user.name });
-    this.showSearchResult = !this.showSearchResult;
+    control.at(index).patchValue({ fullName: user.name + " (" + user.username + ")" });
+    this.inputsOnFocus[index] = false;
   }
 
   createPool(form: FormGroup) {
+  }
+
+  onFocus(i: number) {
+    let memberNumber: number = i + 1;
+    console.log("Focus on input of member: " + memberNumber);
+
+    for (let i = 0 ; i < this.inputsOnFocus.length; i++) {
+      this.inputsOnFocus[i] = false
+    }
+    this.inputsOnFocus[i] = true;
   }
 
 }
