@@ -105,6 +105,22 @@ export class PoolPresetationPageComponent implements OnInit {
   }
 
   createPool(form: FormGroup) {
+    let poolName: string = this.myForm.controls["poolName"].value
+    console.log(poolName);
+
+    let membersUsername: string[] = [];
+    const control = <FormArray>this.myForm.controls['members'];
+    for (let i = 0; i < control.length; i++) {
+      var username: string = control.at(i).value.fullName;
+      let begin: number = username.indexOf("(") + 1;
+      let end: number = username.indexOf(")");
+      membersUsername.push(username.substring(begin, end));
+    }
+
+    console.log(membersUsername);
+    //TODO send data to server
+
+    this.showAddOppForm = !this.showAddOppForm;
   }
 
   onFocus(i: number) {
