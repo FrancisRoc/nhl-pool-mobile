@@ -11,8 +11,8 @@ export class PoolService {
   constructor(private http: Http) { }
 
   //TODO change to add domain path and version for const in http trequests
-  getAll() {
-    return this.http.get(environment.apiUrl + 'api/nhl/poolApp/v1/pools/getAll').map((response: Response) => response.json())
+  getAllForMember(memberId: string) {
+    return this.http.get(environment.apiUrl + 'api/nhl/poolApp/v1/pools/getAll/' + memberId).map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
