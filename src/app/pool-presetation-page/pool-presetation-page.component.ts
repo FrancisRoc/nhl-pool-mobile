@@ -37,7 +37,11 @@ export class PoolPresetationPageComponent implements OnInit {
   // we will use form builder to simplify our syntax
   constructor(private _fb: FormBuilder,
     private userSearchService: UserSearchService,
-    private poolService: PoolService) { }
+    private poolService: PoolService) {
+      this.poolService.getAll().subscribe((pools: PoolResponse[]) => {
+        this.pools = pools;
+      });
+    }
 
   ngOnInit() {
     // we will initialize our form here

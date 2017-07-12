@@ -11,15 +11,16 @@ export class PoolService {
   constructor(private http: Http) { }
 
   //TODO change to add domain path and version for const in http trequests
-  //getAll() {
-  //return this.http.get(environment.apiUrl + 'api/nhl/poolApp/v1/users').map((response: Response) => response.json());
-  //}
+  getAll() {
+    return this.http.get(environment.apiUrl + 'api/nhl/poolApp/v1/pools/getAll').map((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 
   create(pool: Pool): Observable<PoolResponse> {
     console.log("Create pool called: " + environment.apiUrl + 'api/nhl/poolApp/v1/pools/create');
     return this.http.post(environment.apiUrl + 'api/nhl/poolApp/v1/pools/create', pool)
-                    .map((response: Response) => response.json())
-                    .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+      .map((response: Response) => response.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   /*update(user: User) {
