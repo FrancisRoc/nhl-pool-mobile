@@ -25,6 +25,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
   styleUrls: ['./pool-presetation-page.component.css']
 })
 export class PoolPresetationPageComponent implements OnInit {
+  currentUser: User;
   pools: PoolResponse[] = [];
   inputsOnFocus: boolean[] = [];
   showAddOppForm = false;
@@ -38,7 +39,8 @@ export class PoolPresetationPageComponent implements OnInit {
   constructor(private _fb: FormBuilder,
     private userSearchService: UserSearchService,
     private poolService: PoolService) {
-      this.poolService.getAll().subscribe((pools: PoolResponse[]) => {
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      this.poolService.getAllForMember(this.currentUser._id).subscribe((pools: PoolResponse[]) => {
         this.pools = pools;
       });
     }
@@ -126,6 +128,8 @@ export class PoolPresetationPageComponent implements OnInit {
       let end: number = username.indexOf(")");
       members.push(username.substring(begin, end));
     }
+    //Add ourself
+    members.push(this.currentUser.username);
 
     console.log(members);
 
