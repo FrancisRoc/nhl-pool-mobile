@@ -30,6 +30,7 @@ import { UserService } from '../app/shared/services/user.service';
 import { AuthenticationService } from '../app/shared/services/authentification.service';
 import { AlertService } from '../app/shared/services/alert.service';
 import { UserSearchService } from '../app/shared/services/user-search.service';
+import { PoolService } from '../app/shared/services/pool.service';
 import { CustomHttp } from '../app/shared/services/http/custom-http';
 import { AuthGuard } from '../app/autoGuard/auth.guard';
 
@@ -75,6 +76,7 @@ import { SearchOpponentComponent } from './search-opponent/search-opponent.compo
     AuthenticationService,
     AlertService,
     UserSearchService,
+    PoolService,
     CustomHttp,
     AuthGuard,
   ],

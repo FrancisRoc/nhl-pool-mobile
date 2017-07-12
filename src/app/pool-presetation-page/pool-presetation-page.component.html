@@ -13,9 +13,11 @@
 
   <div class="col-sm-3 col-md-3 col-lg-3" *ngFor="let pool of pools">
     <div class="panel panel-default">
-      <div class="panel-heading">{{pool}}</div>
+      <div class="panel-heading">{{pool.name}}</div>
       <div class="panel-body">
-        {{pool}}
+        <div *ngFor="let member of pool.members">
+          <p>{{member.name}}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -57,8 +59,8 @@
                 <div [formGroupName]="i">
                   <!--street-->
                   <div class="form-group">
-                    <input id="search-box" (focus)="onFocus(i)" (keyup)="search('', i)" type="text" class="form-control" placeholder="Enter name..." formControlName="fullName"
-                      required autocomplete="off" />
+                    <input id="search-box" (focus)="onFocus(i)" (keyup)="search('', i)" type="text" class="form-control" placeholder="Enter name..."
+                      formControlName="fullName" required autocomplete="off" />
                     <div *ngIf="myForm.controls.members.controls[i].controls.fullName.valid && inputsOnFocus[i]">
                       <div class="search-result" *ngFor="let user of users | async" (click)="selectMember(i, user)">
                         <p class="member-name"> {{user.name}} ({{user.username}}) </p>
