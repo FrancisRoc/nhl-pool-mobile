@@ -1,8 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { UserSearchService } from '../../app/shared/services/user-search.service';
+import { PoolService } from '../../app/shared/services/pool.service';
+
 import { Opponent } from '../add-opponent-form/opponent';
 import { User } from '../../app/shared/models/user';
+import { PoolResponse } from '../../app/shared/models/poolResponse';
+import { Pool } from '../../app/shared/models/pool';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -21,7 +25,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
   styleUrls: ['./pool-presetation-page.component.css']
 })
 export class PoolPresetationPageComponent implements OnInit {
-  pools = ["test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8",];
+  pools: PoolResponse[] = [];
   inputsOnFocus: boolean[] = [];
   showAddOppForm = false;
   model: any = {};
@@ -31,7 +35,9 @@ export class PoolPresetationPageComponent implements OnInit {
   private searchTerms = new Subject<string>();
 
   // we will use form builder to simplify our syntax
-  constructor(private _fb: FormBuilder, private userSearchService: UserSearchService) { }
+  constructor(private _fb: FormBuilder,
+    private userSearchService: UserSearchService,
+    private poolService: PoolService) { }
 
   ngOnInit() {
     // we will initialize our form here
@@ -106,19 +112,30 @@ export class PoolPresetationPageComponent implements OnInit {
 
   createPool(form: FormGroup) {
     let poolName: string = this.myForm.controls["poolName"].value
-    console.log(poolName);
+    console.log("Pool name: " + poolName);
 
-    let membersUsername: string[] = [];
+    let members: string[] = [];
     const control = <FormArray>this.myForm.controls['members'];
     for (let i = 0; i < control.length; i++) {
       var username: string = control.at(i).value.fullName;
       let begin: number = username.indexOf("(") + 1;
       let end: number = username.indexOf(")");
-      membersUsername.push(username.substring(begin, end));
+      members.push(username.substring(begin, end));
     }
 
-    console.log(membersUsername);
-    //TODO send data to server
+    console.log(members);
+
+    let pool: Pool = {
+      name: poolName,
+      members: members
+    }
+    //send data to server
+    this.poolService.create(pool).subscribe((pool: PoolResponse) => {
+      if (pool) {
+        console.log(pool);
+        this.pools.push(pool);
+      }
+    });
 
     this.showAddOppForm = !this.showAddOppForm;
   }
@@ -127,7 +144,7 @@ export class PoolPresetationPageComponent implements OnInit {
     let memberNumber: number = i + 1;
     console.log("Focus on input of member: " + memberNumber);
 
-    for (let i = 0 ; i < this.inputsOnFocus.length; i++) {
+    for (let i = 0; i < this.inputsOnFocus.length; i++) {
       this.inputsOnFocus[i] = false
     }
     this.inputsOnFocus[i] = true;
