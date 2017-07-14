@@ -24,8 +24,8 @@
                 <div class="dropdown-row">
                   <a class="dropdown-line"(click)="playerDraftBy(currentUser.username, playerStats?.player?.ID)" >{{currentUser.firstName}} {{currentUser.lastName}}</a>
                 </div>
-                <div class="dropdown-row" *ngFor="let opponent of opponents">
-                  <a class="dropdown-line"(click)="playerDraftBy(opponent.name, playerStats?.player?.ID)" >{{opponent.name}}</a>
+                <div class="dropdown-row" *ngFor="let member of members">
+                  <a class="dropdown-line"(click)="playerDraftBy(member.name, playerStats?.player?.ID)" >{{member.username}}</a>
                 </div>
               </div>
             </div>

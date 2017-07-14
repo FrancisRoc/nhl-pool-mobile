@@ -1,0 +1,181 @@
+.panel > .panel-heading {
+    background-image: none;
+    background-color: #D32F2F;
+    color: white;
+    font-size: 1.5em;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.panel-body {
+  height: 150px;
+  cursor: pointer;
+}
+
+.panel-form {
+  height: 100%;
+}
+
+.panel-new {
+  text-align: center;
+}
+
+.container {
+  margin-top: 15px;
+}
+
+.fa-plus {
+  line-height: inherit;
+}
+
+.fa-plus:hover {
+  color: #666666;
+  cursor: pointer;
+}
+/* The Overlay (background) */
+.overlay {
+    /* Height & width depends on how you want to reveal the overlay (see JS below) */
+    height: 100%;
+    width: 100%;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    margin-top: 25px;
+    background-color: white; /* Black fallback color */
+    background-color: rgba(0, 0, 0, 0.6);
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+}
+
+/* Position the content inside the overlay */
+.overlay-content {
+    position: relative;
+    top: 25%; /* 25% from the top */
+    width: 100%; /* 100% width */
+    margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+/* The navigation links inside the overlay */
+.overlay .closebtn {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #222;
+    display: block; /* Display block instead of inline */
+    transition: 0.3s; /* Transition effects on hover (color) */
+}
+
+/* When you mouse over the navigation links, change their color */
+.overlay .closebtn:hover, .overlay .closebtn:focus {
+    color: #666666;
+}
+
+/* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
+@media screen and (max-height: 450px) {
+    .overlay .closebtn {font-size: 20px}
+}
+
+.closebtn {
+  position:absolute;
+  top: 0;
+  right: 0;
+  margin-right: 15px;
+  margin-top: -15px;
+}
+
+.form-group {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.form-group > label {
+  margin-left: 2px;
+}
+
+h2 {
+  color: black;
+  margin-left: 10.5%;
+}
+
+small {
+  margin-left: 2px;
+  margin-top: 2px;
+  color: #cc0000;
+  float: left;
+}
+
+.add-member {
+  text-align: left;
+  margin-left: 10%;
+  margin-top: 10px;
+}
+
+.button {
+  margin-left: 10%;
+  margin-top: 5px;
+  float: left;
+}
+
+.title {
+  float: left;
+  text-align:left;
+  margin-left: 10.5%;
+}
+
+.remove {
+  float: right;
+  text-align:right;
+  color: #222;
+  font-weight: bold;
+  margin-right: 10.5%;
+}
+
+.remove:hover {
+  color: #666666;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-primary {
+  border: none;
+  background-color: black;
+}
+
+.btn-primary:not([disabled]):hover {
+  background-color: #666666;
+  transition: 0.3s;
+}
+
+.btn-primary:disabled {
+    background: #222;
+}
+
+.search-result {
+  position: relative; right: 0; padding: 0; overflow: hidden;
+  height: 30px;
+  width: 100%;
+  list-style: none;
+  color: rgb(105, 105, 105);
+  border: 1px solid #ccc;
+  border-top: none;
+  /*so things don't jump around*/
+  background: #fff;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  letter-spacing: 1px;
+}
+
+.search-result:hover {
+  background-color: #Ef9a9a;
+  cursor: pointer;
+}
+
+.member-name {
+  margin-top: 2%;
+  margin-left: 2%;
+}

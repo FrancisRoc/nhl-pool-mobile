@@ -1,5 +1,7 @@
 export class Opponent {
   constructor(
-    public name: string
+    public _id: string,
+    public name: string,
+    public username: string
   ) {}
 }

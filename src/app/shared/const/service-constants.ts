@@ -27,6 +27,7 @@ export let STAT_FROM_BOOLEAN = {
 }
 
 export let STAT_NAME_FROM_ABREVIATION = {
+  "Overall": "points",
   "Goals": "goals",
   "Assists": "assists",
   "Points": "points",

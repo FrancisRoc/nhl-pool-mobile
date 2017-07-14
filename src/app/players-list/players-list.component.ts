@@ -7,8 +7,7 @@ import { DTOStatsSelector } from '../../app/stats-selector/dto-stats-selector';
 import { STAT_NAME_FROM_ABREVIATION } from '../../app/shared/const/service-constants';
 import { PlayersIndividualStatsService } from '../../app/shared/services/playersIndividualStatsService';
 import { IPlayerIndividualStat } from '../../app/shared/interfaces/playerIndividualStat';
-import { OpponentsService } from '../../app/shared/services/opponentsService';
-import { Opponent } from '../../app/add-opponent-form/opponent';
+import { PoolService } from '../../app/shared/services/pool.service';
 import { DraftPlayerService } from '../shared/services/draftPlayerService';
 import { User } from '../shared/models/user';
 
@@ -29,19 +28,19 @@ export class PlayersListComponent implements OnInit, OnDestroy {
   currentStatString: string;
   currentStatTag: string;
   private subscription: Subscription;
-  opponents: Opponent[];
+  members: User[];
   private currentUser: User;
 
   constructor(private http: Http,
     private router: Router,
+    private poolService: PoolService,
     private serveStatService: PlayersIndividualStatsService,
-    private opponentService: OpponentsService,
     private draftPlayerService: DraftPlayerService) {
-    this.subscription = opponentService.getAddOpponentEvent().subscribe(opponents => {
-      this.opponents = opponents;
+    this.subscription = poolService.getAddMemberEvent().subscribe(pool => {
+      console.log("Update pool members: " + util.inspect(pool.members, false, null));
+      this.members = pool.members;
     })
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
   }
 
   ngOnInit() {
@@ -67,8 +66,8 @@ export class PlayersListComponent implements OnInit, OnDestroy {
     } else {
       this.currentStatTag = "";
     }
-
-    this.opponents = this.opponentService.getOpponents();
+    this.getPlayerStat(this.currentStatTag);    
+    this.members = this.poolService.getCurrentPool().members;
   }
 
   ngOnDestroy() {
