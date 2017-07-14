@@ -1,4 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { Router } from '@angular/router'
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { UserSearchService } from '../../app/shared/services/user-search.service';
 import { PoolService } from '../../app/shared/services/pool.service';
@@ -38,7 +39,8 @@ export class PoolPresetationPageComponent implements OnInit {
   // we will use form builder to simplify our syntax
   constructor(private _fb: FormBuilder,
     private userSearchService: UserSearchService,
-    private poolService: PoolService) {
+    private poolService: PoolService,
+    private router: Router) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
       this.poolService.getAllForMember(this.currentUser._id).subscribe((pools: PoolResponse[]) => {
         this.pools = pools;
@@ -156,6 +158,13 @@ export class PoolPresetationPageComponent implements OnInit {
       this.inputsOnFocus[i] = false
     }
     this.inputsOnFocus[i] = true;
+  }
+
+  openPool(pool: PoolResponse) {
+    console.log("Select pool " + pool.name);
+    //Call pool service to set current pool to selected pool
+    this.poolService.setCurrentPool(pool);
+    this.router.navigate(['/pools', pool.name]);
   }
 
 }

@@ -12,12 +12,13 @@ import { PoolPresetationPageComponent } from '../../app/pool-presetation-page/po
 import { AuthGuard } from '../autoGuard/auth.guard';
 
 const appRoutes: Routes = [
+  { path: 'playerInfo/:id', component: PlayerInfoPageComponent },
+  { path: 'pools/:name', component: HomePageComponent },
   { path: 'drafted', component: DraftedPageComponent },
   { path: 'pools', component: PoolPresetationPageComponent },
-  { path: 'home', component: HomePageComponent, canActivate: [AuthGuard] },
+  //{ path: 'home', component: HomePageComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },
-  { path: 'playerInfo/:id', component: PlayerInfoPageComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

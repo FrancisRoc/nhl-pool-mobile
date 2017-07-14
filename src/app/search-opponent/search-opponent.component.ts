@@ -23,7 +23,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
   styleUrls: ['./search-opponent.component.css']
 })
 export class SearchOpponentComponent implements OnInit {
-  @Output() addOpponentForm = new EventEmitter<void>();
+  @Output() addOpponentForm = new EventEmitter<User>();
   users: Observable<User[]>;
   private searchTerms = new Subject<string>();
 
@@ -54,8 +54,7 @@ export class SearchOpponentComponent implements OnInit {
   }
 
   addOpponent(user: User) {
-    this.opponentsService.addOpponent(new Opponent(user._id, user.name, user.username));
-    this.addOpponentForm.emit();
+    this.addOpponentForm.emit(user);
   }
 
   onSubmit(form: NgForm) {

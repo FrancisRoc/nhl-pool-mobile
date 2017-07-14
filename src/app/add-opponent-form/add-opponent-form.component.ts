@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { OpponentsService } from '../../app/shared/services/opponentsService';
+import { PoolService } from '../../app/shared/services/pool.service';
 import { UserSearchService } from '../../app/shared/services/user-search.service';
 import { User } from '../../app/shared/models/user';
 import { NgForm } from '@angular/forms'
@@ -26,23 +26,24 @@ export class AddOpponentFormComponent implements OnInit {
   @Output() showFormChange = new EventEmitter<boolean>();
   @Input() showForm;
 
-  constructor(private opponentsService: OpponentsService, private userSearchService: UserSearchService) { }
+  constructor(private poolService: PoolService, private userSearchService: UserSearchService) { }
 
   ngOnInit() {
   }
 
-  onSubmit(form: NgForm) {
+  /*onSubmit(form: NgForm) {
     console.log("Add opponent: " + form.value.opponent);
-    //TODO THINK this.opponentsService.addOpponent(new Opponent(form.value.opponent, form.value.));
     this.showFormChange.emit(!this.showForm);
     form.resetForm();
-  }
+  }TODO ???*/
 
   cancel() {
     this.showFormChange.emit(!this.showForm);
   }
 
-  addOpponent() {
+  addOpponent(user: User) {
+    console.log("Add user: " + user);
+    this.poolService.addMember(user);
     this.showFormChange.emit(!this.showForm);
   }
 }

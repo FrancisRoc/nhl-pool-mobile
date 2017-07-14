@@ -12,7 +12,7 @@
   </div>
 
   <div class="col-sm-3 col-md-3 col-lg-3" *ngFor="let pool of pools">
-    <div class="panel panel-default">
+    <div class="panel panel-default" (click)="openPool(pool)">
       <div class="panel-heading">{{pool.name}}</div>
       <div class="panel-body">
         <div *ngFor="let member of pool.members">

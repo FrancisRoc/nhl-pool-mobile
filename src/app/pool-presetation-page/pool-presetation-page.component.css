@@ -6,10 +6,12 @@
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 400;
     letter-spacing: 1px;
+    cursor: pointer;
 }
 
 .panel-body {
   height: 150px;
+  cursor: pointer;
 }
 
 .panel-form {
@@ -30,6 +32,7 @@
 
 .fa-plus:hover {
   color: #666666;
+  cursor: pointer;
 }
 /* The Overlay (background) */
 .overlay {

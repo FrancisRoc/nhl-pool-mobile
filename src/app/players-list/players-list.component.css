@@ -26,6 +26,10 @@
     letter-spacing: 1px;
   }
 
+  a:hover {
+    cursor: pointer;
+  }
+
   /* Striped table */
   tr:nth-child(even) {background-color: #EF9A9A}
 

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { environment } from '../../../environments/environment';
-import { OpponentsService } from '../services/opponentsService';
+import { PoolService } from '../services/pool.service';
 import { Opponent } from '../../add-opponent-form/opponent';
 import { User } from '../models/user';
 
@@ -14,7 +14,7 @@ export class UserSearchService {
   private currentUser: User;
   private opponents: Opponent[];
 
-  constructor(private http: Http, private opponentService: OpponentsService) { 
+  constructor(private http: Http, private poolService: PoolService) { 
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
@@ -23,7 +23,7 @@ export class UserSearchService {
     console.log("API call: " + environment.apiUrl + `api/nhl/poolApp/v1/users?name=${term}`);
 
     // Update opponents
-    this.opponents = this.opponentService.getOpponents();
+    this.opponents = this.poolService.getCurrentPool().members;
     return this.http
       .get(environment.apiUrl + `api/nhl/poolApp/v1/users?name=${term}`)
       .map(response => {
