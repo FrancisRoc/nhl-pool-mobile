@@ -8,6 +8,8 @@ import { User } from '../models/user';
 import { Pool } from '../models/pool';
 import { PoolResponse } from '../models/poolResponse';
 
+let util = require('util');
+
 @Injectable()
 export class PoolService {
   private addMemberSubject: Subject<PoolResponse>;
@@ -18,20 +20,20 @@ export class PoolService {
   }
 
   getAddMemberEvent(): Observable<PoolResponse> {
-      return this.addMemberSubject.asObservable();
-    }
+    return this.addMemberSubject.asObservable();
+  }
 
   //TODO change to add domain path and version for const in http trequests
   getAllForMember(memberId: string) {
     return this.http.get(environment.apiUrl + 'api/nhl/poolApp/v1/pools/getAll/' + memberId).map((response: Response) => response.json())
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   create(pool: Pool): Observable<PoolResponse> {
     console.log("Create pool called: " + environment.apiUrl + 'api/nhl/poolApp/v1/pools/create');
     return this.http.post(environment.apiUrl + 'api/nhl/poolApp/v1/pools/create', pool)
       .map((response: Response) => response.json())
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+      .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   setCurrentPool(pool: PoolResponse) {
@@ -43,7 +45,17 @@ export class PoolService {
   }
 
   addMember(member: User) {
-    //TODO Send add member to mongodb
+    //Server get an array of users
+    let members: User[] = [];
+    members.push(member);
+
+    //Send add member to mongodb
+    console.log("Add member: " + environment.apiUrl + 'api/nhl/poolApp/v1/pools/' + this.currentPool._id + '/members');
+    console.log("With members: " + util.inspect(members, false, null))
+    this.http.post(environment.apiUrl + 'api/nhl/poolApp/v1/pools/' + this.currentPool._id + '/members', members)
+      .catch((error: any) => Observable.throw(error || 'Server error'))
+      .subscribe();
+
     this.currentPool.members.push(member);
     this.addMemberSubject.next(this.currentPool);
   }
