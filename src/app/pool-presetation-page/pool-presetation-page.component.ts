@@ -47,7 +47,7 @@ export class PoolPresetationPageComponent implements OnInit {
         this.pools = pools;
       });
       // no current pool = no opponents when we create a new pool
-      this.poolService.setCurrentPool(null);
+      //this.poolService.setCurrentPool(null);
     }
 
   ngOnInit() {
