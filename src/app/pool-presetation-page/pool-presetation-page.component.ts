@@ -45,6 +45,8 @@ export class PoolPresetationPageComponent implements OnInit {
       this.poolService.getAllForMember(this.currentUser._id).subscribe((pools: PoolResponse[]) => {
         this.pools = pools;
       });
+      // no current pool = no opponents when we create a new pool
+      this.poolService.setCurrentPool(null);
     }
 
   ngOnInit() {
