@@ -22,6 +22,9 @@ export class UserSearchService {
     console.log("search service called. Search for users matching: " + term);
     console.log("API call: " + environment.apiUrl + `api/nhl/poolApp/v1/users?name=${term}`);
 
+    //Update current user
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
     // Update opponents
     if (this.poolService.getCurrentPool()) {
       this.opponents = this.poolService.getCurrentPool().members;
