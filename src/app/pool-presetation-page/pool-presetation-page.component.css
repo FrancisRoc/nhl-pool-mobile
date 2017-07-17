@@ -179,3 +179,7 @@ small {
   margin-top: 2%;
   margin-left: 2%;
 }
+
+.members {
+  display: inline-block;
+}

@@ -1,28 +1,36 @@
 <tool-bar></tool-bar>
 <app-header></app-header>
 
-<div class="container equal">
-  <div class="col-sm-3 col-md-3 col-lg-3">
-    <div class="panel panel-default panel-new">
-      <div class="panel-heading">New pool</div>
-      <div class="panel-body">
-        <i class="fa fa-plus fa-5x" aria-hidden="true" (click)="openNav()"></i>
+<body>
+  <div class="container equal">
+    <div class="col-sm-3 col-md-3 col-lg-3">
+      <div class="panel panel-default panel-new">
+        <div class="panel-heading">New pool</div>
+        <div class="panel-body">
+          <i class="fa fa-plus fa-5x" aria-hidden="true" (click)="openNav()"></i>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="col-sm-3 col-md-3 col-lg-3" *ngFor="let pool of pools">
-    <div class="panel panel-default" (click)="openPool(pool)">
-      <div class="panel-heading">{{pool.name}}</div>
-      <div class="panel-body">
-        <div *ngFor="let member of pool.members">
-          <p>{{member.name}}</p>
+    <div class="col-sm-3 col-md-3 col-lg-3" *ngFor="let pool of pools">
+      <div class="panel panel-default" (click)="openPool(pool)">
+        <div class="panel-heading">{{pool.name}}</div>
+        <div class="panel-body">
+          <div *ngFor="let member of pool.members">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <p class="members">{{member.name}}</p>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+          <i class="fa fa-trash" aria-hidden="true"></i>
+          <i class="fa fa-info-circle" aria-hidden="true"></i>
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
         </div>
       </div>
     </div>
   </div>
-</div>
-
+</body>
 <!-- The overlay -->
 <div id="myNav" class="overlay" *ngIf="showAddOppForm">
   <!-- Overlay content -->
