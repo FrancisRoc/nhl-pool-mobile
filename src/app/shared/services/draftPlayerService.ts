@@ -10,11 +10,11 @@ let util = require('util');
 export class DraftPlayerService {
     constructor(private http: Http) {}
 
-    draftPlayer(playerId: number): Observable<void> {
+    draftPlayer(playerId: number) {
         console.log("Send request: https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/v1/players/draft/" + playerId);
         return this.http.delete('https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/v1/players/draft/' + playerId)
-                        .map(this.extractData)
-                        .catch(this.handleError);
+                        .catch(this.handleError)
+                        .subscribe();
     }
     private extractData(res: Response) {
         let body = res.json();
