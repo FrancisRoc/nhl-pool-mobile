@@ -12,6 +12,8 @@ import { DraftPlayerService } from '../shared/services/draftPlayerService';
 import { User } from '../shared/models/user';
 import { playerListStatsLabels, playerListStatsNames } from "../shared/const/constants";
 
+import { PoolResponse } from '../../app/shared/models/poolResponse';
+
 import * as localStorageIndexes from 'app/shared/const/localStorageIndexes';
 
 var util = require('util');
@@ -29,8 +31,8 @@ export class PlayersListComponent implements OnInit, OnDestroy {
   currentStatString: string;
   currentStatTag: string;
   private subscription: Subscription;
-  members: User[];
   private currentUser: User;
+  private currentPool: PoolResponse;
   playerListStatsLabels: string[] = playerListStatsLabels;
   playerListStatsNames: string[] = playerListStatsNames;
 
@@ -40,8 +42,8 @@ export class PlayersListComponent implements OnInit, OnDestroy {
     private serveStatService: PlayersIndividualStatsService,
     private draftPlayerService: DraftPlayerService) {
     this.subscription = poolService.getAddMemberEvent().subscribe(pool => {
-      console.log("Update pool members: " + util.inspect(pool.members, false, null));
-      this.members = pool.members;
+      console.log("Update pool members: " + util.inspect(pool, false, null));
+      this.currentPool = pool;
     })
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
@@ -70,13 +72,13 @@ export class PlayersListComponent implements OnInit, OnDestroy {
       this.currentStatTag = "";
     }
 
+    this.currentPool = this.poolService.getCurrentPool();
+
     if (this.currentStatTag) {
       this.getPlayerStat(this.currentStatTag);
     } else {
       this.getPlayerStat("Overall");
     }
-
-    this.members = this.poolService.getCurrentPool().members;
   }
 
   ngOnDestroy() {
@@ -86,7 +88,7 @@ export class PlayersListComponent implements OnInit, OnDestroy {
   getPlayerStat(statSelected) {
     this.currentStatString = this.statNameFromAbreviation[statSelected];
     this.currentStatTag = statSelected;
-    this.serveStatService.requestPlayersStats(this.currentStatString)
+    this.serveStatService.requestPlayersStats(this.currentStatString, this.currentPool._id)
       .subscribe(
       stats => {
         this.playersIndividualStats = stats;
@@ -100,9 +102,9 @@ export class PlayersListComponent implements OnInit, OnDestroy {
     this.router.navigate(['/playerInfo', player.player.ID]);
   }
 
-  playerDraftBy(opponent, playerId) {
-    console.log("Player with id " + playerId + " drafted by: " + opponent);
-    this.draftPlayerService.draftPlayer(playerId);
+  playerDraftBy(userId: string, playerId: string) {
+    console.log("Player with id " + playerId + " drafted by: " + userId);
+    this.draftPlayerService.draftPlayer(userId, this.currentPool._id, playerId);
 
     // Remove from players list
     this.playersIndividualStats = this.playersIndividualStats.filter(item => item.player.ID !== playerId);

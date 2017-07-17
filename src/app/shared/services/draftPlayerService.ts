@@ -4,15 +4,17 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
+import { environment } from '../../../environments/environment';
+
 let util = require('util');
 
 @Injectable()
 export class DraftPlayerService {
     constructor(private http: Http) {}
 
-    draftPlayer(playerId: number) {
-        console.log("Send request: https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/v1/players/draft/" + playerId);
-        return this.http.delete('https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/v1/players/draft/' + playerId)
+    draftPlayer(userId: string, poolId: string, playerId: string) {
+        console.log("Send request: " + environment.apiUrl + "api/nhl/poolApp/v1/players/draft/" + userId + "/" + poolId + "/" + playerId);
+        return this.http.delete(environment.apiUrl + 'api/nhl/poolApp/v1/players/draft/' + userId + "/" + poolId + "/" + playerId)
                         .catch(this.handleError)
                         .subscribe();
     }

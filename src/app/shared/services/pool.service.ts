@@ -31,6 +31,7 @@ export class PoolService {
   }
 
   create(pool: Pool): Observable<PoolResponse> {
+    // Will also create players pooling to be able to do drafting for each pool
     console.log("Create pool called: " + environment.apiUrl + 'api/nhl/poolApp/v1/pools/create');
     return this.http.post(environment.apiUrl + 'api/nhl/poolApp/v1/pools/create', pool)
       .map((response: Response) => response.json())

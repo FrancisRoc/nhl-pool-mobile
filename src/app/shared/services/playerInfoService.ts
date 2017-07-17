@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
+import { environment } from '../../../environments/environment';
 import * as Player from '../../../app/shared/interfaces/playerInfo';
 let util = require('util');
 
@@ -12,8 +13,8 @@ export class PlayersInfoService {
     constructor(private http: Http) {}
 
     requestPlayerInfo(id: string, year: number): Observable<Player.PlayerInfo> {
-        console.log("Send request: https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/v1/players/stats/player/" + id + "/" + year);
-        return this.http.get('https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/v1/players/stats/player/' + id + "/" + year)
+        console.log("Send request: " + environment.apiUrl + "api/nhl/poolApp/v1/players/stats/player/" + id + "/" + year);
+        return this.http.get(environment.apiUrl + 'api/nhl/poolApp/v1/players/stats/player/' + id + "/" + year)
                         .map(this.extractData)
                         .catch(this.handleError);
     }

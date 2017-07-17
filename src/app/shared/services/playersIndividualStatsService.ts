@@ -5,15 +5,16 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import { IPlayerIndividualStat } from '../../../app/shared/interfaces/playerIndividualStat';
+import { environment } from '../../../environments/environment';
 let util = require('util');
 
 @Injectable()
 export class PlayersIndividualStatsService {
     constructor(private http: Http) {}
 
-    requestPlayersStats(statToGet: string): Observable<IPlayerIndividualStat[]> {
-        console.log("Send request: https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/v1/players/stats/" + statToGet);
-        return this.http.get('https://nhlpoolhelperapi.herokuapp.com/api/nhl/poolApp/v1/players/stats/' + statToGet)
+    requestPlayersStats(statToGet: string, poolId: string): Observable<IPlayerIndividualStat[]> {
+        console.log("Send request: " + environment.apiUrl + "api/nhl/poolApp/v1/players/stats/" + statToGet + "/" + poolId);
+        return this.http.get(environment.apiUrl + 'api/nhl/poolApp/v1/players/stats/' + statToGet + "/" + poolId)
                         .map(this.extractData)
                         .catch(this.handleError);
     }

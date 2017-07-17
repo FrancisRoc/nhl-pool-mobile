@@ -147,6 +147,8 @@ export class PoolPresetationPageComponent implements OnInit {
       if (pool) {
         console.log(pool);
         this.pools.push(pool);
+
+        //TODO save initial pool important stats with pool id
       }
     });
 

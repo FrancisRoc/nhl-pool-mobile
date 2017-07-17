@@ -18,10 +18,10 @@
               </button>
               <div class="dropdown-menu">
                 <div class="dropdown-row">
-                  <a class="dropdown-line" (click)="playerDraftBy(currentUser.username, playerStats?.player?.ID)">{{currentUser.firstName}} {{currentUser.lastName}}</a>
+                  <a class="dropdown-line" (click)="playerDraftBy(currentUser._id, playerStats?.player?.ID)">{{currentUser.firstName}} {{currentUser.lastName}}</a>
                 </div>
-                <div class="dropdown-row" *ngFor="let member of members">
-                  <a class="dropdown-line" (click)="playerDraftBy(member.name, playerStats?.player?.ID)">{{member.username}}</a>
+                <div class="dropdown-row" *ngFor="let member of currentPool.members">
+                  <a class="dropdown-line" (click)="playerDraftBy(member._id, playerStats?.player?.ID)">{{member.username}}</a>
                 </div>
               </div>
             </div>
