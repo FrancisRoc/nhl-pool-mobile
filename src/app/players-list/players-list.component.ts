@@ -10,6 +10,7 @@ import { IPlayerIndividualStat } from '../../app/shared/interfaces/playerIndivid
 import { PoolService } from '../../app/shared/services/pool.service';
 import { DraftPlayerService } from '../shared/services/draftPlayerService';
 import { User } from '../shared/models/user';
+import { playerListStatsLabels, playerListStatsNames } from "../shared/const/constants";
 
 import * as localStorageIndexes from 'app/shared/const/localStorageIndexes';
 
@@ -30,6 +31,8 @@ export class PlayersListComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   members: User[];
   private currentUser: User;
+  playerListStatsLabels: string[] = playerListStatsLabels;
+  playerListStatsNames: string[] = playerListStatsNames;
 
   constructor(private http: Http,
     private router: Router,
@@ -66,7 +69,7 @@ export class PlayersListComponent implements OnInit, OnDestroy {
     } else {
       this.currentStatTag = "";
     }
-    this.getPlayerStat(this.currentStatTag);    
+    this.getPlayerStat(this.currentStatTag);
     this.members = this.poolService.getCurrentPool().members;
   }
 
@@ -103,6 +106,14 @@ export class PlayersListComponent implements OnInit, OnDestroy {
     localStorage.setItem(localStorageIndexes.PLAYER_LIST_PLAYER_STATS, JSON.stringify(this.playersIndividualStats));
     localStorage.setItem(localStorageIndexes.PLAYER_LIST_CURRENT_STAT_STRING, this.currentStatString);
     localStorage.setItem(localStorageIndexes.PLAYER_LIST_CURRENT_STAT_TAG, this.currentStatTag);
+  }
+
+  getStyle(statName: string): string {
+    if (this.currentStatString === statName) {
+      return "bold";
+    } else {
+      return "normal";
+    }
   }
 }
 

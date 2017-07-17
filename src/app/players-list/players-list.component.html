@@ -3,18 +3,14 @@
     <table *ngIf="playersIndividualStats.length > 0">
       <thead>
         <tr>
-          <!-- TODO: Use *ngIf to encapsulate infos in an array or object -->
-          <th>Name</th>
-          <th>GP</th>
-          <th>{{currentStatTag}}</th>
-          <th>Selected by</th>
+          <th *ngFor="let statLabel of playerListStatsLabels"> {{statLabel}} </th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let playerStats of playersIndividualStats">
-          <td class="player-link"><a (click)="onPlayerSelect(playerStats)">{{playerStats?.player?.FirstName}} {{playerStats?.player?.LastName}}</a></td>
+          <td class="player-link"><a (click)="onPlayerSelect(playerStats)" style="font-weight:bold">{{playerStats?.player?.FirstName}} {{playerStats?.player?.LastName}}</a></td>
           <td>{{playerStats?.stats?.gamesPlayed}}</td>
-          <td>{{playerStats?.stats?.stats[currentStatString]}}</td>
+          <td *ngFor="let statName of playerListStatsNames"[style.font-weight]="getStyle(statName)">{{playerStats?.stats?.stats[statName]}}</td>
           <td>
             <div class="dropdown">
               <button class="dropbtn">
@@ -22,10 +18,10 @@
               </button>
               <div class="dropdown-menu">
                 <div class="dropdown-row">
-                  <a class="dropdown-line"(click)="playerDraftBy(currentUser.username, playerStats?.player?.ID)" >{{currentUser.firstName}} {{currentUser.lastName}}</a>
+                  <a class="dropdown-line" (click)="playerDraftBy(currentUser.username, playerStats?.player?.ID)">{{currentUser.firstName}} {{currentUser.lastName}}</a>
                 </div>
                 <div class="dropdown-row" *ngFor="let member of members">
-                  <a class="dropdown-line"(click)="playerDraftBy(member.name, playerStats?.player?.ID)" >{{member.username}}</a>
+                  <a class="dropdown-line" (click)="playerDraftBy(member.name, playerStats?.player?.ID)">{{member.username}}</a>
                 </div>
               </div>
             </div>
