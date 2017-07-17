@@ -14,7 +14,7 @@ export class UserSearchService {
   private currentUser: User;
   private opponents: Opponent[];
 
-  constructor(private http: Http, private poolService: PoolService) { 
+  constructor(private http: Http, private poolService: PoolService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
@@ -22,8 +22,16 @@ export class UserSearchService {
     console.log("search service called. Search for users matching: " + term);
     console.log("API call: " + environment.apiUrl + `api/nhl/poolApp/v1/users?name=${term}`);
 
+    //Update current user
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
     // Update opponents
-    this.opponents = this.poolService.getCurrentPool().members;
+    if (this.poolService.getCurrentPool()) {
+      this.opponents = this.poolService.getCurrentPool().members;
+    } else {
+      this.opponents = [];
+    }
+
     return this.http
       .get(environment.apiUrl + `api/nhl/poolApp/v1/users?name=${term}`)
       .map(response => {
@@ -32,7 +40,7 @@ export class UserSearchService {
         for (let i = 0; i < this.opponents.length; i++) {
           excludeCurrentUser = excludeCurrentUser.filter(item => item.username !== this.opponents[i].username);
         }
-        return excludeCurrentUser as User[] 
+        return excludeCurrentUser as User[]
       });
   }
 

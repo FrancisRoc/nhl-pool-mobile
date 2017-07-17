@@ -42,9 +42,12 @@ export class PoolPresetationPageComponent implements OnInit {
     private poolService: PoolService,
     private router: Router) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      console.log("Get all pool of member: " + this.currentUser.username);
       this.poolService.getAllForMember(this.currentUser._id).subscribe((pools: PoolResponse[]) => {
         this.pools = pools;
       });
+      // no current pool = no opponents when we create a new pool
+      this.poolService.setCurrentPool(null);
     }
 
   ngOnInit() {

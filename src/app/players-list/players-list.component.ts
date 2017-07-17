@@ -69,7 +69,13 @@ export class PlayersListComponent implements OnInit, OnDestroy {
     } else {
       this.currentStatTag = "";
     }
-    this.getPlayerStat(this.currentStatTag);
+
+    if (this.currentStatTag) {
+      this.getPlayerStat(this.currentStatTag);
+    } else {
+      this.getPlayerStat("Overall");
+    }
+
     this.members = this.poolService.getCurrentPool().members;
   }
 

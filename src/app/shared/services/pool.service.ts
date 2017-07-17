@@ -25,6 +25,7 @@ export class PoolService {
 
   //TODO change to add domain path and version for const in http trequests
   getAllForMember(memberId: string) {
+    console.log(environment.apiUrl + 'api/nhl/poolApp/v1/pools/getAll/' + memberId);
     return this.http.get(environment.apiUrl + 'api/nhl/poolApp/v1/pools/getAll/' + memberId).map((response: Response) => response.json())
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
