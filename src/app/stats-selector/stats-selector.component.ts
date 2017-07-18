@@ -19,7 +19,13 @@ export class StatsSelectorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.importantStatsAttrs = this.importantStatsService.getImportantStatsAttrs();
+    console.log("Imposrtant stats load...");
+
+    this.importantStatsService.getImportantStatsAttrs().subscribe((importantStatsAttrs: StatsAttributes[]) => {
+        this.importantStatsAttrs = importantStatsAttrs;
+    });
+
+    //this.importantStatsAttrs = this.importantStatsService.getImportantStatsAttrs();
   }
 
   toggleSelectedStat(statAttrs: StatsAttributes) {

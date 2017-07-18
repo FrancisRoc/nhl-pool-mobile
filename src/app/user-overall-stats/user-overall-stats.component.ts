@@ -40,7 +40,11 @@ export class UserOverallStatsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.importantStatsAttrs = this.importantStatsService.getImportantStatsAttrs();
+    this.importantStatsService.getImportantStatsAttrs().subscribe((importantStatsAttrs: StatsAttributes[]) => {
+        this.importantStatsAttrs = importantStatsAttrs;
+    });
+
+    //this.importantStatsAttrs = this.importantStatsService.getImportantStatsAttrs();
     this.opponents = this.poolService.getCurrentPool().members.filter(item => item._id !== this.currentUser._id);
 
     this.isAddOpponentActivated = false;

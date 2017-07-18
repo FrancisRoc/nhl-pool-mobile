@@ -4,6 +4,7 @@ import { UserOverallStatsComponent } from '../../app/user-overall-stats/user-ove
 import { STAT_FROM_BOOLEAN } from '../../app/shared/const/service-constants';
 import { IDropdownStatInfo } from '../../app/shared/interfaces/dropdownStatInfo';
 import { DTOStatsSelector } from '../../app/stats-selector/dto-stats-selector';
+import { ImportantStatsService } from '../../app/shared/services/importantStatsService';
 import * as localStorageIndexes from '../../app/shared/const/localStorageIndexes';
 
 const util = require('util');

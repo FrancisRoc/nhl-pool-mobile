@@ -3,6 +3,7 @@ import { Router } from '@angular/router'
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { UserSearchService } from '../../app/shared/services/user-search.service';
 import { PoolService } from '../../app/shared/services/pool.service';
+import { ImportantStatsService } from '../../app/shared/services/importantStatsService';
 
 import { Opponent } from '../add-opponent-form/opponent';
 import { User } from '../../app/shared/models/user';
@@ -40,6 +41,7 @@ export class PoolPresetationPageComponent implements OnInit {
   constructor(private _fb: FormBuilder,
     private userSearchService: UserSearchService,
     private poolService: PoolService,
+    private importantStatsService: ImportantStatsService,
     private router: Router) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
       console.log("Get all pool of member: " + this.currentUser.username);
@@ -148,7 +150,9 @@ export class PoolPresetationPageComponent implements OnInit {
         console.log(pool);
         this.pools.push(pool);
 
-        //TODO save initial pool important stats with pool id
+        //save initial pool important stats with pool id
+        this.importantStatsService.saveDefaultImportantStats(pool._id);
+        //TODO save initial current stat to overall
       }
     });
 

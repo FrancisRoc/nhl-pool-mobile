@@ -68,8 +68,8 @@ import { SearchOpponentComponent } from './search-opponent/search-opponent.compo
   ],
   providers: [
     PlayersIndividualStatsService,
-    OpponentsService,
     ImportantStatsService,
+    OpponentsService,
     PlayersInfoService,
     DraftPlayerService,
     UserService,
