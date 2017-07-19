@@ -19,8 +19,8 @@
             <span class="caret"></span>
           </button>
           <div class="dropdown-menu">
-            <div class="dropdown-row" *ngFor="let stat of statsInDropdown">
-              <a class="dropdown-line" *ngIf="!stat.hide" (click)="playerList.getPlayerStat(stat.statName)" (click)="setDropdownCurrentStat(stat.statName)">{{stat.statName}}</a>
+            <div class="dropdown-row" *ngFor="let stat of importantStatsAttrs">
+              <a class="dropdown-line" *ngIf="!stat.hide && stat.name !== currentStat" (click)="playerList.getPlayerStat(stat.name)" (click)="setDropdownCurrentStat(stat.name)">{{stat.name}}</a>
             </div>
           </div>
         </div>

@@ -23,16 +23,16 @@ export class ImportantStatsService {
     saveDefaultImportantStats(poolId: string) {
       //Basic important stats set to goals, assists and points
       let importantStats: StatsAttributes[] = [
-        new StatsAttributes("Goals", "isGoalsSelected", true),
-        new StatsAttributes("Assists", "isAssistsSelected", true),
-        new StatsAttributes("Points", "isPointsSelected", true),
-        new StatsAttributes("+/-", "isPlusMinusSelected", false),
-        new StatsAttributes("PIM", "isPIMSelected", false),
-        new StatsAttributes("PPG", "isPPGSelected", false),
-        new StatsAttributes("SHG", "isSHGSelected", false),
-        new StatsAttributes("PPPS", "isPPPSelected", false),
-        new StatsAttributes("SHP", "isSHPSelected", false),
-        new StatsAttributes("Hits", "isHitsSelected", false)
+        new StatsAttributes("Goals", "isGoalsSelected", true, false),
+        new StatsAttributes("Assists", "isAssistsSelected", true, false),
+        new StatsAttributes("Points", "isPointsSelected", true, false),
+        new StatsAttributes("+/-", "isPlusMinusSelected", false, true),
+        new StatsAttributes("PIM", "isPIMSelected", false, true),
+        new StatsAttributes("PPG", "isPPGSelected", false, true),
+        new StatsAttributes("SHG", "isSHGSelected", false, true),
+        new StatsAttributes("PPPS", "isPPPSelected", false, true),
+        new StatsAttributes("SHP", "isSHPSelected", false, true),
+        new StatsAttributes("Hits", "isHitsSelected", false, true)
       ];
       
       console.log("POST" + environment.apiUrl + 'api/nhl/poolApp/v1/pools/' + poolId + '/stats');
@@ -42,7 +42,13 @@ export class ImportantStatsService {
     }
 
     changeIsCheckStat(statAttrs: StatsAttributes) {
-      statAttrs.isCheck = !statAttrs.isCheck;
+      var currentStatObj: StatsAttributes;
+      for (let i = 0; i < this.importantStatsAttrs.length; i++) {
+        if (this.importantStatsAttrs[i].name === statAttrs.name) {
+          currentStatObj = this.importantStatsAttrs[i];
+          currentStatObj.isCheck = !currentStatObj.isCheck;
+        }
+      }
       this.importantStatsAttrsChange.next(this.importantStatsAttrs);
       
       //TODO update database for important stats
@@ -55,7 +61,7 @@ export class ImportantStatsService {
     getImportantStatsAttrs() {
       console.log("GET" + environment.apiUrl + 'api/nhl/poolApp/v1/pools/' + this.poolService.getCurrentPool()._id + '/stats');
       return this.http.get(environment.apiUrl + 'api/nhl/poolApp/v1/pools/' + this.poolService.getCurrentPool()._id + '/stats')
-                      .map((response: Response) => response.json().importantStats)
+                      .map((response: Response) => this.importantStatsAttrs = response.json().importantStats)
                       .catch((error: any) => Observable.throw(error || 'Server error'))
     }
 }

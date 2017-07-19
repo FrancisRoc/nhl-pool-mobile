@@ -24,13 +24,13 @@ export class StatsSelectorComponent implements OnInit {
     this.importantStatsService.getImportantStatsAttrs().subscribe((importantStatsAttrs: StatsAttributes[]) => {
         this.importantStatsAttrs = importantStatsAttrs;
     });
-
-    //this.importantStatsAttrs = this.importantStatsService.getImportantStatsAttrs();
   }
 
   toggleSelectedStat(statAttrs: StatsAttributes) {
     this.importantStatsService.changeIsCheckStat(statAttrs);
     // Push changes to all subscribers
-    this.importantStatsAttrsChange.emit(statAttrs);
+    let deepCopy: StatsAttributes = statAttrs;
+    deepCopy.isCheck = !deepCopy.isCheck;
+    this.importantStatsAttrsChange.emit(deepCopy);
   }
 }

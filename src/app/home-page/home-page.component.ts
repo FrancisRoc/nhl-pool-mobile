@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StatsSelectorComponent } from '../../app/stats-selector/stats-selector.component';
 import { UserOverallStatsComponent } from '../../app/user-overall-stats/user-overall-stats.component';
 import { STAT_FROM_BOOLEAN } from '../../app/shared/const/service-constants';
-import { IDropdownStatInfo } from '../../app/shared/interfaces/dropdownStatInfo';
+import { StatsAttributes } from '../../app/shared/interfaces/stats-attributes';
 import { DTOStatsSelector } from '../../app/stats-selector/dto-stats-selector';
 import { ImportantStatsService } from '../../app/shared/services/importantStatsService';
 import * as localStorageIndexes from '../../app/shared/const/localStorageIndexes';
@@ -15,21 +15,25 @@ const util = require('util');
 })
 export class HomePageComponent implements OnInit {
   private statDictionary;           // Get stat name from boolean string (ex: isGoalsSelected = Goals)
-  statsInDropdown: IDropdownStatInfo[];         // Stat names presented in dropdown menu
+  importantStatsAttrs: StatsAttributes[];
   currentStat: string;                          // Current stat selected in dropdown button
 
-  constructor() {
+  constructor(private importantStatsService: ImportantStatsService) {
   }
 
   ngOnInit() {
     this.statDictionary = STAT_FROM_BOOLEAN;
 
-    let recoverStatsInDropdown: IDropdownStatInfo[] = JSON.parse(localStorage.getItem(localStorageIndexes.HOME_PAGE_STATS_IN_DROPDOWN));
-    if (recoverStatsInDropdown) {
-      this.statsInDropdown = recoverStatsInDropdown;
-    } else {
-      this.statsInDropdown = [ {statName: "Overall", hide: true} ];
-    }
+    this.importantStatsService.getImportantStatsAttrs().subscribe((importantStatsAttrs: StatsAttributes[]) => {
+        console.log("Important stats attributes updated in home page dropdown: " + util.inspect(importantStatsAttrs, false, null))
+        this.importantStatsAttrs = importantStatsAttrs;
+        this.importantStatsAttrs.push({
+          name: "Overall",
+          selectorName: "",
+          isCheck: true,
+          hide: true
+        });
+    });
 
     let recoverCurrentStat: string = localStorage.getItem(localStorageIndexes.HOME_PAGE_CURRENT_STAT);
     if (recoverCurrentStat) {
@@ -45,48 +49,45 @@ export class HomePageComponent implements OnInit {
   }
 
   private addStatToDropdownMenu(event) {
-    let statInfo = {
-        statName: this.statDictionary[event.selectorName],
-        hide: false
-    }
+    // Show or hide stat in dropdown
+    event.hide = !event.hide;
+    // Stat has been selected or not?
     if (event.isCheck) {
       // Add to dropdown choices
-      console.log("ADD " + util.inspect(statInfo, false, null) + "IN DROPDOWN");
-      this.statsInDropdown.push(statInfo);
+      console.log("ADD " + util.inspect(event, false, null) + " IN DROPDOWN");
+      this.importantStatsAttrs.push(event);
     } else {
+      console.log("REMOVE " + util.inspect(event, false, null) + " IN DROPDOWN");
       // Remove from dropdown choices
-      this.statsInDropdown = this.statsInDropdown.filter(item => item.statName !== statInfo.statName);
+      this.importantStatsAttrs = this.importantStatsAttrs.filter(item => item.name !== event.name);
 
       // If current stat in dropdown replace with overall
-      if (this.currentStat === statInfo.statName) {
+      if (this.currentStat === event.statName) {
         this.currentStat = "Overall";
-        this.statsInDropdown = this.statsInDropdown.filter(item => item.statName !== this.currentStat);
-        localStorage.setItem(localStorageIndexes.HOME_PAGE_CURRENT_STAT, this.currentStat);
+        //TODO update mongo
+        //localStorage.setItem(localStorageIndexes.HOME_PAGE_CURRENT_STAT, this.currentStat);
       }
     }
-    localStorage.setItem(localStorageIndexes.HOME_PAGE_STATS_IN_DROPDOWN, JSON.stringify(this.statsInDropdown));
+    // TODO update important stats in mongodb
+    //localStorage.setItem(localStorageIndexes.HOME_PAGE_STATS_IN_DROPDOWN, JSON.stringify(this.statsInDropdown));
   }
 
   setDropdownCurrentStat(stat) {
-    var currentStatObj: IDropdownStatInfo;
     //Show current stat in dropdown to display new selected stat
-    for (let i = 0; i < this.statsInDropdown.length; i++) {
-      if (this.statsInDropdown[i].statName === this.currentStat) {
-        currentStatObj = this.statsInDropdown[i];
-        currentStatObj.hide = !currentStatObj.hide;
-        break;
-      }
-    }
-    //Hide new current stat in dropdown menu
-    for (let i = 0; i < this.statsInDropdown.length; i++) {
-      if (this.statsInDropdown[i].statName === stat) {
-        currentStatObj = this.statsInDropdown[i];
-        currentStatObj.hide = !currentStatObj.hide;
-        break;
+    for (let i = 0; i < this.importantStatsAttrs.length; i++) {
+      if (this.importantStatsAttrs[i].name === this.currentStat) {
+        this.importantStatsAttrs[i].hide = !this.importantStatsAttrs[i].hide;
+        //currentStatObj.isCheck = !currentStatObj.isCheck;
+      } else if (this.importantStatsAttrs[i].name === stat) {
+        //Hide new current stat in dropdown menu
+        this.importantStatsAttrs[i].hide = !this.importantStatsAttrs[i].hide;
       }
     }
     this.currentStat = stat;
-    localStorage.setItem(localStorageIndexes.HOME_PAGE_CURRENT_STAT, this.currentStat);
-    localStorage.setItem(localStorageIndexes.HOME_PAGE_STATS_IN_DROPDOWN, JSON.stringify(this.statsInDropdown));
+    //TODO update mongo
+    //localStorage.setItem(localStorageIndexes.HOME_PAGE_CURRENT_STAT, this.currentStat);
+
+    // TODO update important stats in mongodb
+    //localStorage.setItem(localStorageIndexes.HOME_PAGE_STATS_IN_DROPDOWN, JSON.stringify(this.statsInDropdown));
   }
 }
