@@ -6,6 +6,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { environment } from '../../../environments/environment';
 import { PoolService } from '../../../app/shared/services/pool.service';
 import { StatsAttributes } from '../../../app/shared/interfaces/stats-attributes';
+import { IPoolStats } from '../../../app/shared/interfaces/poolStats';
 import { IMPORTANT_STATS_ATTRS } from '../../../app/shared/const/service-constants';
 import * as localStorageIndexes from '../../../app/shared/const/localStorageIndexes';
 
@@ -15,6 +16,7 @@ let util = require('util');
 export class ImportantStatsService {
     private importantStatsAttrsChange: Subject<StatsAttributes[]>;
     private importantStatsAttrs: StatsAttributes[];
+    private currentStat: string;
 
     constructor(private http: Http, private poolService: PoolService) {
       this.importantStatsAttrsChange = new Subject<StatsAttributes[]>();
@@ -32,11 +34,31 @@ export class ImportantStatsService {
         new StatsAttributes("SHG", "isSHGSelected", false, true),
         new StatsAttributes("PPPS", "isPPPSelected", false, true),
         new StatsAttributes("SHP", "isSHPSelected", false, true),
-        new StatsAttributes("Hits", "isHitsSelected", false, true)
+        new StatsAttributes("Hits", "isHitsSelected", false, true),
+        new StatsAttributes("Overall", "", true, true)
       ];
+
+      let poolStats: IPoolStats = {
+        currentStat: "Overall",
+        importantStats: importantStats
+      }
       
-      console.log("POST" + environment.apiUrl + 'api/nhl/poolApp/v1/pools/' + poolId + '/stats');
-      this.http.post(environment.apiUrl + 'api/nhl/poolApp/v1/pools/' + poolId + '/stats', importantStats)
+      console.log("POST " + environment.apiUrl + 'api/nhl/poolApp/v1/pools/' + poolId + '/stats');
+      this.http.post(environment.apiUrl + 'api/nhl/poolApp/v1/pools/' + poolId + '/stats', poolStats)
+                .catch((error: any) => Observable.throw(error || 'Server error'))
+                .subscribe();
+    }
+
+    updateImportantStats(poolId: string, importantStats: StatsAttributes[]) {
+      console.log("PUT " + environment.apiUrl + 'api/nhl/poolApp/v1/pools/' + poolId + '/stats');
+      this.http.put(environment.apiUrl + 'api/nhl/poolApp/v1/pools/' + poolId + '/stats', importantStats)
+                .catch((error: any) => Observable.throw(error || 'Server error'))
+                .subscribe();
+    }
+
+    updateCurrentStat(poolId: string, currentStat: string) {
+      console.log("PUT " + environment.apiUrl + 'api/nhl/poolApp/v1/pools/' + poolId + '/currentStat and currentStat: ' + currentStat);
+      this.http.put(environment.apiUrl + 'api/nhl/poolApp/v1/pools/' + poolId + '/currentStat', { currentStat })
                 .catch((error: any) => Observable.throw(error || 'Server error'))
                 .subscribe();
     }
@@ -58,10 +80,14 @@ export class ImportantStatsService {
       return this.importantStatsAttrsChange.asObservable();
     }
 
-    getImportantStatsAttrs() {
-      console.log("GET" + environment.apiUrl + 'api/nhl/poolApp/v1/pools/' + this.poolService.getCurrentPool()._id + '/stats');
+    getPoolStatsAttrs(): Observable<IPoolStats> {
+      console.log("GET " + environment.apiUrl + 'api/nhl/poolApp/v1/pools/' + this.poolService.getCurrentPool()._id + '/stats');
       return this.http.get(environment.apiUrl + 'api/nhl/poolApp/v1/pools/' + this.poolService.getCurrentPool()._id + '/stats')
-                      .map((response: Response) => this.importantStatsAttrs = response.json().importantStats)
+                      .map((response: Response) => {
+                        this.importantStatsAttrs = response.json().importantStats
+                        this.currentStat = response.json().currentStat
+                        return response.json();
+                      })
                       .catch((error: any) => Observable.throw(error || 'Server error'))
     }
 }

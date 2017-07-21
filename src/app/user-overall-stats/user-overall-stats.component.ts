@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { StatsSelectorComponent } from '../stats-selector/stats-selector.component';
 import { IMPORTANT_STATS_ATTRS } from '../shared/const/service-constants';
 import { StatsAttributes } from '../shared/interfaces/stats-attributes';
+import { IPoolStats } from '../shared/interfaces/poolStats';
 import { ImportantStatsService } from '../shared/services/importantStatsService';
 import { PoolService } from '../shared/services/pool.service';
 import { UserService } from '../shared/services/user.service';
@@ -40,8 +41,8 @@ export class UserOverallStatsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.importantStatsService.getImportantStatsAttrs().subscribe((importantStatsAttrs: StatsAttributes[]) => {
-        this.importantStatsAttrs = importantStatsAttrs;
+    this.importantStatsService.getPoolStatsAttrs().subscribe((poolStats: IPoolStats) => {
+        this.importantStatsAttrs = poolStats.importantStats;
     });
 
     //this.importantStatsAttrs = this.importantStatsService.getImportantStatsAttrs();

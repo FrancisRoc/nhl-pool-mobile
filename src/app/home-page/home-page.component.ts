@@ -3,9 +3,13 @@ import { StatsSelectorComponent } from '../../app/stats-selector/stats-selector.
 import { UserOverallStatsComponent } from '../../app/user-overall-stats/user-overall-stats.component';
 import { STAT_FROM_BOOLEAN } from '../../app/shared/const/service-constants';
 import { StatsAttributes } from '../../app/shared/interfaces/stats-attributes';
+import { IPoolStats } from '../../app/shared/interfaces/poolStats';
 import { DTOStatsSelector } from '../../app/stats-selector/dto-stats-selector';
 import { ImportantStatsService } from '../../app/shared/services/importantStatsService';
-import * as localStorageIndexes from '../../app/shared/const/localStorageIndexes';
+import { PoolService } from '../../app/shared/services/pool.service';
+import { PoolResponse } from '../../app/shared/models/poolResponse';
+
+//import * as localStorageIndexes from '../../app/shared/const/localStorageIndexes';
 
 const util = require('util');
 
@@ -16,31 +20,22 @@ const util = require('util');
 export class HomePageComponent implements OnInit {
   private statDictionary;           // Get stat name from boolean string (ex: isGoalsSelected = Goals)
   importantStatsAttrs: StatsAttributes[];
-  currentStat: string;                          // Current stat selected in dropdown button
+  currentStat: string;                     // Current stat selected in dropdown button
+  currentPool: PoolResponse;
 
-  constructor(private importantStatsService: ImportantStatsService) {
+  constructor(private importantStatsService: ImportantStatsService, private poolService: PoolService) {
   }
 
   ngOnInit() {
     this.statDictionary = STAT_FROM_BOOLEAN;
 
-    this.importantStatsService.getImportantStatsAttrs().subscribe((importantStatsAttrs: StatsAttributes[]) => {
-        console.log("Important stats attributes updated in home page dropdown: " + util.inspect(importantStatsAttrs, false, null))
-        this.importantStatsAttrs = importantStatsAttrs;
-        this.importantStatsAttrs.push({
-          name: "Overall",
-          selectorName: "",
-          isCheck: true,
-          hide: true
-        });
+    this.importantStatsService.getPoolStatsAttrs().subscribe((poolStats: IPoolStats) => {
+        console.log("Pool important stats attributes updated in home page dropdown: " + util.inspect(poolStats, false, null))
+        this.importantStatsAttrs = poolStats.importantStats;
+        this.currentStat = poolStats.currentStat;
     });
 
-    let recoverCurrentStat: string = localStorage.getItem(localStorageIndexes.HOME_PAGE_CURRENT_STAT);
-    if (recoverCurrentStat) {
-      this.currentStat = recoverCurrentStat;
-    } else {
-      this.currentStat = "Overall";
-    }
+    this.currentPool = this.poolService.getCurrentPool();
   }
 
   // TODO hide choice instead of removing from list
@@ -64,11 +59,13 @@ export class HomePageComponent implements OnInit {
       // If current stat in dropdown replace with overall
       if (this.currentStat === event.statName) {
         this.currentStat = "Overall";
-        //TODO update mongo
+        //update current stat mongo
+        this.importantStatsService.updateCurrentStat(this.currentPool._id ,this.currentStat);
         //localStorage.setItem(localStorageIndexes.HOME_PAGE_CURRENT_STAT, this.currentStat);
       }
     }
-    // TODO update important stats in mongodb
+    // update important stats in mongodb
+    this.importantStatsService.updateImportantStats(this.currentPool._id , this.importantStatsAttrs);
     //localStorage.setItem(localStorageIndexes.HOME_PAGE_STATS_IN_DROPDOWN, JSON.stringify(this.statsInDropdown));
   }
 
@@ -84,10 +81,12 @@ export class HomePageComponent implements OnInit {
       }
     }
     this.currentStat = stat;
-    //TODO update mongo
+    // update mongo
+    this.importantStatsService.updateCurrentStat(this.currentPool._id ,this.currentStat);    
     //localStorage.setItem(localStorageIndexes.HOME_PAGE_CURRENT_STAT, this.currentStat);
 
-    // TODO update important stats in mongodb
+    // update important stats in mongodb
+    this.importantStatsService.updateImportantStats(this.currentPool._id , this.importantStatsAttrs);
     //localStorage.setItem(localStorageIndexes.HOME_PAGE_STATS_IN_DROPDOWN, JSON.stringify(this.statsInDropdown));
   }
 }

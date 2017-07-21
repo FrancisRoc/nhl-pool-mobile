@@ -152,7 +152,6 @@ export class PoolPresetationPageComponent implements OnInit {
 
         //save initial pool important stats with pool id
         this.importantStatsService.saveDefaultImportantStats(pool._id);
-        //TODO save initial current stat to overall
       }
     });
 

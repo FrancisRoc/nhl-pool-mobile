@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserOverallStatsComponent } from '../../app/user-overall-stats/user-overall-stats.component';
 import { ImportantStatsService } from '../../app/shared/services/importantStatsService';
 import { StatsAttributes } from '../../app/shared/interfaces/stats-attributes';
+import { IPoolStats } from '../../app/shared/interfaces/poolStats';
 
 let util = require('util');
 
@@ -21,8 +22,8 @@ export class StatsSelectorComponent implements OnInit {
   ngOnInit() {
     console.log("Imposrtant stats load...");
 
-    this.importantStatsService.getImportantStatsAttrs().subscribe((importantStatsAttrs: StatsAttributes[]) => {
-        this.importantStatsAttrs = importantStatsAttrs;
+    this.importantStatsService.getPoolStatsAttrs().subscribe((poolStats: IPoolStats) => {
+        this.importantStatsAttrs = poolStats.importantStats;
     });
   }
 
