@@ -9,6 +9,11 @@
     cursor: pointer;
 }
 
+.panel {
+  box-shadow: 3px 3px 1px #888888;
+  border: none;
+}
+
 .panel-body {
   height: 150px;
   cursor: pointer;
@@ -20,6 +25,10 @@
 
 .panel-new {
   text-align: center;
+}
+
+.fa-pencil-new-pool {
+  visibility: hidden;
 }
 
 .container {
@@ -182,4 +191,14 @@ small {
 
 .members {
   display: inline-block;
+}
+
+.fa-arrow-right {
+  float: right;
+}
+
+.fa-pencil, .fa-trash, .fa-info-circle, .fa-arrow-right {
+  padding-right: 2%;
+  font-size: 1.35em;
+  text-shadow: 1px 1px 1px #ccc;
 }
