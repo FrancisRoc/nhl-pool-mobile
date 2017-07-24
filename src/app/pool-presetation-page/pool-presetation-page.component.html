@@ -4,10 +4,10 @@
 <body>
   <div class="container equal">
     <div class="col-sm-3 col-md-3 col-lg-3">
-      <div class="panel panel-default panel-new">
+      <div class="panel panel-default panel-new" (click)="openNav()">
         <div class="panel-heading">New pool</div>
         <div class="panel-body">
-          <i class="fa fa-plus fa-5x" aria-hidden="true" (click)="openNav()"></i>
+          <i class="fa fa-plus fa-5x" aria-hidden="true"></i>
         </div>
         <div class="panel-footer new-pool-footer">
           <i class="fa fa-pencil fa-pencil-new-pool" aria-hidden="true"></i>
@@ -28,7 +28,7 @@
           <i class="fa fa-pencil" aria-hidden="true"></i>
           <i class="fa fa-trash" aria-hidden="true"></i>
           <i class="fa fa-info-circle" aria-hidden="true"></i>
-          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          <i class="fa fa-arrow-right" aria-hidden="true" (click)="openPool(pool)"></i>
         </div>
       </div>
     </div>
