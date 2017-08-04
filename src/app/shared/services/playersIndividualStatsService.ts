@@ -13,8 +13,8 @@ export class PlayersIndividualStatsService {
     constructor(private http: Http) {}
 
     requestPlayersStats(statToGet: string, poolId: string): Observable<IPlayerIndividualStat[]> {
-        console.log("Send request: " + environment.apiUrl + "api/nhl/poolApp/v1/players/stats/" + statToGet + "/" + poolId);
-        return this.http.get(environment.apiUrl + 'api/nhl/poolApp/v1/players/stats/' + statToGet + "/" + poolId)
+        console.log("Send request: " + environment.apiUrl + "api/nhl/poolApp/v1/players/pool/" + poolId + "/" + "stats/orderedBy/" + statToGet);
+        return this.http.get(environment.apiUrl + "api/nhl/poolApp/v1/players/pool/" + poolId + "/" + "stats/orderedBy/" + statToGet)
                         .map(this.extractData)
                         .catch(this.handleError);
     }

@@ -44,18 +44,24 @@ export class HomePageComponent implements OnInit {
   }
 
   private addStatToDropdownMenu(event) {
-    // Show or hide stat in dropdown
-    event.hide = !event.hide;
+    const findStat = this.importantStatsAttrs.find(item => item.name === event.name);
+    
     // Stat has been selected or not?
     if (event.isCheck) {
       // Add to dropdown choices
       console.log("ADD " + util.inspect(event, false, null) + " IN DROPDOWN");
-      this.importantStatsAttrs.push(event);
+      if (findStat) {
+        findStat.isCheck = event.isCheck;
+        findStat.hide = !event.hide;
+      }
     } else {
       console.log("REMOVE " + util.inspect(event, false, null) + " IN DROPDOWN");
       // Remove from dropdown choices
-      this.importantStatsAttrs = this.importantStatsAttrs.filter(item => item.name !== event.name);
-
+      if (findStat) {
+        findStat.isCheck = event.isCheck;
+        findStat.hide = !event.hide;
+      }
+      
       // If current stat in dropdown replace with overall
       if (this.currentStat === event.statName) {
         this.currentStat = "Overall";

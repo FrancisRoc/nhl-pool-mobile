@@ -32,7 +32,7 @@ export class ImportantStatsService {
         new StatsAttributes("PIM", "isPIMSelected", false, true),
         new StatsAttributes("PPG", "isPPGSelected", false, true),
         new StatsAttributes("SHG", "isSHGSelected", false, true),
-        new StatsAttributes("PPPS", "isPPPSelected", false, true),
+        new StatsAttributes("PPP", "isPPPSelected", false, true),
         new StatsAttributes("SHP", "isSHPSelected", false, true),
         new StatsAttributes("Hits", "isHitsSelected", false, true),
         new StatsAttributes("Overall", "", true, true)
