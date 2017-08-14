@@ -64,9 +64,11 @@ export class PoolService {
 
   /*update(user: User) {
       return this.http.put(environment.apiUrl + 'api/nhl/poolApp/v1/users/' + user._id, user);
-  }
-
-  delete(_id: string) {
-      return this.http.delete(environment.apiUrl + 'api/nhl/poolApp/v1/users/' + _id);
   }*/
+
+  deletePool(_id: string) {
+      this.http.delete(environment.apiUrl + 'api/nhl/poolApp/v1/pools/' + _id)
+      .catch((error: any) => Observable.throw(error || 'Server error'))
+      .subscribe();
+  }
 }

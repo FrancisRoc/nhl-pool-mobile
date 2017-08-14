@@ -175,4 +175,9 @@ export class PoolPresetationPageComponent implements OnInit {
     this.router.navigate(['/pools', pool.name]);
   }
 
+  deletePool(poolId: string) {
+    this.poolService.deletePool(poolId);
+    this.pools = this.pools.filter((item: PoolResponse) => item._id !== poolId);
+  }
+
 }
